@@ -8,7 +8,7 @@ public class PlayerAiming : MonoBehaviour
 
     void Update()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(player.MovementDirection());
+        Quaternion lookRotation = Quaternion.LookRotation(player.Direction());
 
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }

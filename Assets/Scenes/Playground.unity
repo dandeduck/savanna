@@ -871,6 +871,7 @@ GameObject:
   - component: {fileID: 981443859}
   - component: {fileID: 981443860}
   - component: {fileID: 981443861}
+  - component: {fileID: 981443862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -927,6 +928,7 @@ MonoBehaviour:
   acceleration: 0.01
   decceleration: 0.05
   input: {fileID: 981443860}
+  stamina: {fileID: 981443862}
 --- !u!114 &981443860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,10 +950,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 981443856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da98a6ee7927dac4c9c975a1d1492598, type: 3}
+  m_Script: {fileID: 11500000, guid: a035f9ba791228641829de1fbd945727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 981443859}
+  rotationSpeed: 5
+--- !u!114 &981443862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981443856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f897ef2b0ae004895792c668fbbb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaCapacity: 2
+  replenishmentRate: 1
 --- !u!4 &1185039927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011275134666, guid: a6dbabfd6d3c8cb47b7243b0b8723af2, type: 3}

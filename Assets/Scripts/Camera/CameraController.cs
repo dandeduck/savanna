@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            return player.GetVelocity();
+            return player.Velocity();
         }
     }
 }
