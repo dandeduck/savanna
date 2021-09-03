@@ -15,11 +15,11 @@ public class PlayerMovement : Moveable
         {
             return 1.5f;
         }
-        
+
         return 2.5f;
     }
 
-    protected override Vector3 MoveDirection()
+    public override Vector3 MovementDirection()
     {
         return new Vector3(input.Horizontal(), 0f, input.Vertical()).normalized;
     }

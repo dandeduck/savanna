@@ -20,7 +20,7 @@ public abstract class Moveable : MonoBehaviour
 
     private void Update()
     {
-        currentDirection = MoveDirection();
+        currentDirection = MovementDirection();
 
         if (currentDirection.magnitude >= 0.1f)
         {
@@ -47,6 +47,6 @@ public abstract class Moveable : MonoBehaviour
         return isStopping;
     }
 
-    protected abstract Vector3 MoveDirection();
+    public abstract Vector3 MovementDirection();
     protected abstract float MaxSpeed();
 }
