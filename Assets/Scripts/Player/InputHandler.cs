@@ -28,4 +28,14 @@ public class InputHandler : MonoBehaviour
 
         return Vector3.zero;
     }
+
+    public bool IsSprinting()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
+
+    public bool IsCrouching()
+    {
+        return Input.GetKey(KeyCode.LeftControl);
+    }
 }

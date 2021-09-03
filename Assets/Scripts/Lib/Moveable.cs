@@ -9,11 +9,13 @@ public abstract class Moveable : MonoBehaviour
     private float currentSpeed;
     private Vector3 currentDirection;
     private Vector3 prevDirection;
+    private bool isStopping;
     
     private void Start()
     {
         currentSpeed = 0;
         prevDirection = transform.position;   
+        isStopping = false;
     }
 
     private void Update()
@@ -22,12 +24,14 @@ public abstract class Moveable : MonoBehaviour
 
         if (currentDirection.magnitude >= 0.1f)
         {
+            isStopping = false;
             prevDirection = currentDirection;
             currentSpeed = Mathf.Min(MaxSpeed(), currentSpeed+acceleration);
             controller.Move(currentDirection * currentSpeed * Time.deltaTime);
         }
         else
         {
+            isStopping = true;
             currentSpeed = Mathf.Max(0, currentSpeed-decceleration);
             controller.Move(prevDirection * currentSpeed * Time.deltaTime);
         }
@@ -36,6 +40,11 @@ public abstract class Moveable : MonoBehaviour
     public Vector3 GetVelocity()
     {
         return currentDirection * currentSpeed;
+    }
+
+    public bool IsStopping()
+    {
+        return isStopping;
     }
 
     protected abstract Vector3 MoveDirection();
