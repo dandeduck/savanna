@@ -8,7 +8,7 @@ public class Stamina : MonoBehaviour
     private float value;
     private bool isExhausted;
 
-    void Start()
+    private void Start()
     {
         value = staminaCapacity;   
     }
