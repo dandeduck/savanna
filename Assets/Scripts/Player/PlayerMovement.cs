@@ -17,7 +17,7 @@ public class PlayerMovement : Moveable
 
     protected override float MaxSpeed()
     {
-        if (input.IsSprinting())
+        if (input.Sprinting())
         {
             if (!stamina.IsExhausted())
             {
@@ -28,7 +28,7 @@ public class PlayerMovement : Moveable
 
         stamina.Replenish(Time.deltaTime);
 
-        if (input.IsCrouching())
+        if (input.Crouching())
         {
             return crouchSpeed;
         }
