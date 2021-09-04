@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Stamina : MonoBehaviour
 {
-    public float staminaCapacity;
-    public float replenishmentRate;
+    [SerializeField] private float staminaCapacity;
+    [SerializeField] private float replenishmentRate;
 
     private float value;
     private bool isExhausted;

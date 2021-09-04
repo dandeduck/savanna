@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class Moveable : MonoBehaviour
 {
-    public CharacterController controller;
-    public float acceleration;
-    public float decceleration;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float decceleration;
 
+    private CharacterController controller;
     private float currentSpeed;
     private Vector3 currentDirection;
     private Vector3 prevDirection;
@@ -13,9 +13,13 @@ public abstract class Moveable : MonoBehaviour
     
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
+
         currentSpeed = 0;
         prevDirection = transform.position;   
         isStopping = false;
+
+        onStart();
     }
 
     private void Update()
@@ -29,6 +33,7 @@ public abstract class Moveable : MonoBehaviour
             currentSpeed = Mathf.Min(MaxSpeed(), currentSpeed+acceleration);
             controller.Move(currentDirection * currentSpeed * Time.deltaTime);
         }
+        
         else
         {
             isStopping = true;
@@ -49,4 +54,5 @@ public abstract class Moveable : MonoBehaviour
 
     public abstract Vector3 Direction();
     protected abstract float MaxSpeed();
+    protected virtual void onStart() {}
 }

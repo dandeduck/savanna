@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+    private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
     
     public float Horizontal()
     {

@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Moveable player;
-    public float aheadSpeed;
-    public float followDamping;
-    
-    public Vector3 cameraOffset = new Vector3(0, 13f, -5.5f);
+    [SerializeField] private Moveable player;
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 13f, -5.5f);
+
+    [SerializeField] private float aheadSpeed;
+    [SerializeField] private float followDamping;
 
     private void LateUpdate()
     {

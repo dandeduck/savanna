@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
-    public Moveable player;
-    public float rotationSpeed = 5f;
+    [SerializeField] private float rotationSpeed;
 
+    private Moveable player;
     private Vector3 lastDirection;
 
     private void Start()
     {
+        player = GetComponent<Moveable>();
+
         lastDirection = Vector3.zero;
     }
 
@@ -25,8 +27,9 @@ public class PlayerAiming : MonoBehaviour
             lastDirection = direction;
         }
 
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        if (direction.magnitude != 0)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
+        }
     }
 }
