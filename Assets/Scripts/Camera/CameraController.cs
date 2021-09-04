@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoom;
     [SerializeField] private float zoomStep;
 
+    private void Start()
+    {
+        Camera.main.orthographicSize = minZoom;
+    }
+
     private void LateUpdate()
     {
         FollowPlayer();
