@@ -19,7 +19,7 @@ public abstract class Moveable : MonoBehaviour
         prevDirection = transform.position;   
         isStopping = false;
 
-        onStart();
+        OnStart();
     }
 
     private void Update()
@@ -54,5 +54,5 @@ public abstract class Moveable : MonoBehaviour
 
     public abstract Vector3 Direction();
     protected abstract float MaxSpeed();
-    protected virtual void onStart() {}
+    protected virtual void OnStart() {}
 }

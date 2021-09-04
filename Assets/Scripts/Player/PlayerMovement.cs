@@ -5,11 +5,11 @@ public class PlayerMovement : Moveable
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float crouchSpeed;
-    
+
     private InputHandler input;
     private Stamina stamina;
 
-    protected override void onStart()
+    protected override void OnStart()
     {
         input = GetComponent<InputHandler>();
         stamina = GetComponent<Stamina>();
