@@ -2,25 +2,38 @@ using UnityEngine;
 
 public class EnvironmentHider : MonoBehaviour
 {
-    private const float transperantAlpha = 0f;
+    private Obstructing lastObstructing; 
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        Obstructing obstructing = other.GetComponent<Obstructing>();
+        Ray cameraRay = Camera.main.ViewportPointToRay(Camera.main.WorldToViewportPoint(transform.position));
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        RaycastHit hit = new RaycastHit();
+
+        Physics.Raycast(cameraRay, out hit);
+
+        Obstructing obstructing = hit.transform.GetComponent<Obstructing>();
 
         if (obstructing != null)
         {
             obstructing.MakeTransperent();
+
+            if (obstructing != lastObstructing)
+            {
+                if (lastObstructing != null)
+                {
+                    lastObstructing.MakeVisible();
+                }
+                lastObstructing = obstructing;
+            }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Obstructing obstructing = other.GetComponent<Obstructing>();
-
-        if (obstructing != null)
+        else
         {
-            obstructing.MakeVisible();
+            if (lastObstructing != null)
+            {
+                lastObstructing.MakeVisible();
+                lastObstructing = null;
+            }
         }
     }
 }

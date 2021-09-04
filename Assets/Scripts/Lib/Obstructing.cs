@@ -3,10 +3,9 @@ using UnityEngine;
 public class Obstructing : MonoBehaviour
 {
     [SerializeField] private Shader transparentShader;
-    [SerializeField] private float transparentAlpha;
+    private const float transparentAlpha = 0.1f;
 
     private Renderer objectRenderer;
-    private Collider objectCollider;
 
     private Material[] regularMaterials;
     private Material[] transparentMaterials;
@@ -14,7 +13,6 @@ public class Obstructing : MonoBehaviour
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
-        objectCollider = GetComponent<Collider>();
 
         regularMaterials = objectRenderer.materials;
         transparentMaterials = MakeMaterialsTransparent(regularMaterials);
@@ -23,13 +21,11 @@ public class Obstructing : MonoBehaviour
     public void MakeTransperent()
     {
         objectRenderer.materials = transparentMaterials;
-        objectCollider.isTrigger = true;
     }
 
     public void MakeVisible()
     {
         objectRenderer.materials = regularMaterials;
-        objectCollider.isTrigger = false;
     }
 
     private Material[] MakeMaterialsTransparent(Material[] materials)
