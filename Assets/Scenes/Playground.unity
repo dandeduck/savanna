@@ -983,8 +983,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981443856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.406, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.41, z: 0.01589}
+  m_LocalScale: {x: 0.66586, y: 0.66586, z: 0.66586}
   m_Children:
   - {fileID: 2062310397}
   m_Father: {fileID: 0}
@@ -1453,9 +1453,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 981443859}
+  input: {fileID: 981443860}
   cameraOffset: {x: 0, y: 13, z: -5.5}
   aheadSpeed: 3
   followDamping: 0.5
+  minZoom: 8.8
+  maxZoom: 2.8
+  zoomStep: 1
 --- !u!1001 &1924467762
 PrefabInstance:
   m_ObjectHideFlags: 0

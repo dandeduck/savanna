@@ -29,13 +29,23 @@ public class InputHandler : MonoBehaviour
         return Vector3.zero;
     }
 
-    public bool IsSprinting()
+    public bool Sprinting()
     {
         return Input.GetKey(KeyCode.LeftShift);
     }
 
-    public bool IsCrouching()
+    public bool Crouching()
     {
         return Input.GetKey(KeyCode.LeftControl);
+    }
+
+    public bool ZoomingIn()
+    {
+        return Input.GetAxisRaw("Mouse ScrollWheel") > 0;
+    }
+
+    public bool ZoomingOut()
+    {
+        return Input.GetAxisRaw("Mouse ScrollWheel") < 0;
     }
 }
