@@ -12,7 +12,7 @@ public class EnvironmentHider : MonoBehaviour
         if (obstructing != null)
         {
             collidedObstructing = obstructing;
-            collidedObstructing.MakeTransperent();
+            collidedObstructing.MakeTransparent();
         }
     }
 
@@ -38,7 +38,7 @@ public class EnvironmentHider : MonoBehaviour
 
         if (obstructing != null)
         {
-            obstructing.MakeTransperent();
+            obstructing.MakeTransparent();
 
             if (obstructing != lastObstructing)
             {
