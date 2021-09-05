@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnvironmentHider : MonoBehaviour
 {
-    private Obstructing lastObstructing;
-    private Obstructing collidedObstructing;
+    private Obstruction lastObstructing;
+    private Obstruction collidedObstructing;
 
     private void OnTriggerEnter(Collider collider)
     {
-        Obstructing obstructing = collider.GetComponent<Obstructing>();
+        Obstruction obstructing = collider.GetComponent<Obstruction>();
 
         if (obstructing != null)
         {
@@ -18,7 +18,7 @@ public class EnvironmentHider : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        Obstructing obstructing = collider.GetComponent<Obstructing>();
+        Obstruction obstructing = collider.GetComponent<Obstruction>();
 
         if (obstructing != null)
             obstructing.MakeVisible();
@@ -26,34 +26,47 @@ public class EnvironmentHider : MonoBehaviour
 
     private void Update()
     {
+        Obstruction obstructing = GetClosestObstruction();
+
+        if (obstructing != null)
+            HandleObstruction(obstructing);
+        else
+            HandleNoObstruction();
+    }
+
+    private Obstruction GetClosestObstruction()
+    {
         Ray cameraRay = Camera.main.ViewportPointToRay(Camera.main.WorldToViewportPoint(transform.position));
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         RaycastHit hit = new RaycastHit();
 
         Physics.Raycast(cameraRay, out hit);
 
-        Obstructing obstructing = hit.transform.GetComponent<Obstructing>();
+        return hit.transform.GetComponent<Obstruction>();
+    }
 
-        if (obstructing != null)
+    private void HandleObstruction(Obstruction obstructing)
+    {
+        obstructing.MakeTransparent();
+
+        if (obstructing != lastObstructing)
+            HandleNewObstruction(obstructing);
+    }
+
+    private void HandleNewObstruction(Obstruction obstructing)
+    {
+        if (lastObstructing != null && lastObstructing != collidedObstructing)
+            lastObstructing.MakeVisible();
+
+        lastObstructing = obstructing;
+    }
+
+    private void HandleNoObstruction()
+    {
+        if (lastObstructing != null)
         {
-            if (obstructing.IsOpaque())
-                obstructing.MakeTransparent();
-
-            if (obstructing != lastObstructing)
-            {
-                if (lastObstructing != null && lastObstructing != collidedObstructing)
-                    lastObstructing.MakeVisible();
-
-                lastObstructing = obstructing;
-            }
-        }
-        else
-        {
-            if (lastObstructing != null)
-            {
-                lastObstructing.MakeVisible();
-                lastObstructing = null;
-            }
+            lastObstructing.MakeVisible();
+            lastObstructing = null;
         }
     }
 }

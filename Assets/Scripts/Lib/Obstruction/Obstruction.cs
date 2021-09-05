@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Obstructing : MonoBehaviour
+public class Obstruction : MonoBehaviour
 {
     private Material[] materials;
     private bool isOpaque;
