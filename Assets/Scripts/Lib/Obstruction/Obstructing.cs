@@ -11,20 +11,21 @@ public class Obstructing : MonoBehaviour
         isOpaque = true;
     }
 
+    public bool IsOpaque()
+    {
+        return isOpaque;
+    }
+
     public void MakeTransparent()
     {
         if (isOpaque)
-        {
             MakeMaterialsTransparent();
-        }
     }
 
     public void MakeVisible()
     {
         if (!isOpaque)
-        {
             MakeMaterialsOpaque();
-        }
     }
 
     private void MakeMaterialsTransparent()
@@ -65,14 +66,10 @@ public class Obstructing : MonoBehaviour
         bool alphaClip = material.GetFloat("_AlphaClip") == 1;
 
         if (alphaClip)
-        {
             material.EnableKeyword("_ALPHATEST_ON");
-        }
 
         else
-        {
             material.DisableKeyword("_ALPHATEST_ON");
-        }
 
         SurfaceType surfaceType = (SurfaceType) material.GetFloat("_Surface");
 

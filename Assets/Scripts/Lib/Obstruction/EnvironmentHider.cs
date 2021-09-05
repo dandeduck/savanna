@@ -21,9 +21,7 @@ public class EnvironmentHider : MonoBehaviour
         Obstructing obstructing = collider.GetComponent<Obstructing>();
 
         if (obstructing != null)
-        {
             obstructing.MakeVisible();
-        }
     }
 
     private void Update()
@@ -38,14 +36,14 @@ public class EnvironmentHider : MonoBehaviour
 
         if (obstructing != null)
         {
-            obstructing.MakeTransparent();
+            if (obstructing.IsOpaque())
+                obstructing.MakeTransparent();
 
             if (obstructing != lastObstructing)
             {
                 if (lastObstructing != null && lastObstructing != collidedObstructing)
-                {
                     lastObstructing.MakeVisible();
-                }
+
                 lastObstructing = obstructing;
             }
         }

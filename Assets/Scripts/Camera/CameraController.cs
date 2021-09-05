@@ -29,13 +29,9 @@ public class CameraController : MonoBehaviour
         float zoom = Camera.main.orthographicSize;
 
         if (input.ZoomingIn())
-        {
             Camera.main.orthographicSize = Mathf.Max(maxZoom, zoom - zoomStep);
-        }
         else if (input.ZoomingOut())
-        {
             Camera.main.orthographicSize = Mathf.Min(minZoom, zoom + zoomStep);
-        }
     }
 
     private void FollowPlayer()
@@ -47,12 +43,8 @@ public class CameraController : MonoBehaviour
     private Vector3 SmoothedPlayerVelocity()
     {
         if (player.IsStopping())
-        {
             return Vector3.zero;
-        }
         else
-        {
             return player.Velocity();
-        }
     }
 }
