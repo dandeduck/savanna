@@ -2,7 +2,29 @@ using UnityEngine;
 
 public class EnvironmentHider : MonoBehaviour
 {
-    private Obstructing lastObstructing; 
+    private Obstructing lastObstructing;
+    private Obstructing collidedObstructing;
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        Obstructing obstructing = collider.GetComponent<Obstructing>();
+
+        if (obstructing != null)
+        {
+            collidedObstructing = obstructing;
+            collidedObstructing.MakeTransperent();
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        Obstructing obstructing = collider.GetComponent<Obstructing>();
+
+        if (obstructing != null)
+        {
+            obstructing.MakeVisible();
+        }
+    }
 
     private void Update()
     {
@@ -20,7 +42,7 @@ public class EnvironmentHider : MonoBehaviour
 
             if (obstructing != lastObstructing)
             {
-                if (lastObstructing != null)
+                if (lastObstructing != null && lastObstructing != collidedObstructing)
                 {
                     lastObstructing.MakeVisible();
                 }
