@@ -1,7 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class Obstruction : MonoBehaviour
 {
+    private const float WaitBeforeOpaque = 0.1f;
+
     [SerializeField] private float fadeInSpeed = 20f;
     [SerializeField] private float fadeOutSpeed = 1000f;
     [SerializeField] private float opacity = 0.1f;
@@ -23,35 +26,48 @@ public class Obstruction : MonoBehaviour
         opaqueColors = MakeOpaqueColors(materials);
     }
 
-    private void Update()
-    {
-        if (shouldBeOpaque)
-        {
-            bool hasReached = HasReachedOpaqueness();
-
-            if (!hasReached)
-                LerpOpaqueness();
-        
-            if (!isOpaque)
-                if (hasReached)
-                    MakeMaterialsOpaque();
-        }
-        else
-            if (!HasReachedTransparency())
-                LerpTransparency();
-    }
-
     public void MakeTransparent()
     {
         if (isOpaque)
+        {
             MakeMaterialsTransparent();
+            StartCoroutine(FadeOut());
+        }
 
         shouldBeOpaque = false;
     }
 
     public void MakeVisible()
     {
+        if (!isOpaque)
+            StartCoroutine(FadeIn());
+            
         shouldBeOpaque = true;
+    }
+
+    private IEnumerator FadeIn()
+    {
+        yield return new WaitForSeconds(WaitBeforeOpaque);
+
+        if (shouldBeOpaque)
+        {
+            while (HasReachedOpaqueness())
+            {
+                LerpOpaqueness();
+                yield return null;
+            }
+        
+            MakeMaterialsOpaque();
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        while (!HasReachedTransparency())
+        {
+            LerpTransparency();
+            yield return null;
+        }
     }
 
     private bool HasReachedOpaqueness()
@@ -61,7 +77,7 @@ public class Obstruction : MonoBehaviour
 
     private bool HasReachedTransparency()
     {
-        return materials[materials.Length-1].color.a <= 0.11f;   
+        return materials[materials.Length-1].color.a <= opacity;   
     }
 
     private Color[] MakeTransparentColors(Material[] materials)
