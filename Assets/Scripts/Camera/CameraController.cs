@@ -9,13 +9,16 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float aheadSpeed;
     [SerializeField] private float followDamping;
 
-    [SerializeField] private float minZoom;
-    [SerializeField] private float maxZoom;
-    [SerializeField] private float zoomStep;
+    [SerializeField] private float maxSize;
+    [SerializeField] private float minSize;
+    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float zoomDamping;
+
+    private float targetSize;
 
     private void Start()
     {
-        Camera.main.orthographicSize = minZoom;
+        Camera.main.orthographicSize = maxSize;
     }
 
     private void LateUpdate()
@@ -29,9 +32,11 @@ public class CameraController : MonoBehaviour
         float zoom = Camera.main.orthographicSize;
 
         if (input.ZoomingIn())
-            Camera.main.orthographicSize = Mathf.Max(maxZoom, zoom - zoomStep);
+            targetSize = Mathf.Max(minSize, targetSize - zoomSpeed);
         else if (input.ZoomingOut())
-            Camera.main.orthographicSize = Mathf.Min(minZoom, zoom + zoomStep);
+            targetSize = Mathf.Min(maxSize, targetSize + zoomSpeed);
+            
+        Camera.main.orthographicSize = Mathf.Lerp(zoom, targetSize, zoomDamping * Time.deltaTime);
     }
 
     private void FollowPlayer()
