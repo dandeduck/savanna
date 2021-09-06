@@ -2,30 +2,110 @@ using UnityEngine;
 
 public class Obstruction : MonoBehaviour
 {
+    [SerializeField] private float fadeInSpeed = 20f;
+    [SerializeField] private float fadeOutSpeed = 1000f;
+    [SerializeField] private float opacity = 0.1f;
+
     private Material[] materials;
     private bool isOpaque;
+    private bool shouldBeOpaque;
+
+    private Color[] transparentColors;
+    private Color[] opaqueColors;
 
     private void Start()
     {
         materials = GetComponent<Renderer>().materials;
         isOpaque = true;
+        shouldBeOpaque = true;
+
+        transparentColors = MakeTransparentColors(materials);
+        opaqueColors = MakeOpaqueColors(materials);
     }
 
-    public bool IsOpaque()
+    private void Update()
     {
-        return isOpaque;
+        if (shouldBeOpaque)
+        {
+            bool hasReached = HasReachedOpaqueness();
+
+            if (!hasReached)
+                LerpOpaqueness();
+        
+            if (!isOpaque)
+                if (hasReached)
+                    MakeMaterialsOpaque();
+        }
+        else
+            if (!HasReachedTransparency())
+                LerpTransparency();
     }
 
     public void MakeTransparent()
     {
         if (isOpaque)
             MakeMaterialsTransparent();
+
+        shouldBeOpaque = false;
     }
 
     public void MakeVisible()
     {
-        if (!isOpaque)
-            MakeMaterialsOpaque();
+        shouldBeOpaque = true;
+    }
+
+    private bool HasReachedOpaqueness()
+    {
+        return materials[materials.Length-1].color.a >= 0.99f;   
+    }
+
+    private bool HasReachedTransparency()
+    {
+        return materials[materials.Length-1].color.a <= 0.11f;   
+    }
+
+    private Color[] MakeTransparentColors(Material[] materials)
+    {
+        Color[] colors = new Color[materials.Length];
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            Color materialColor = materials[i].color;
+
+            colors[i] = new Color(materialColor.r, materialColor.g, materialColor.b, opacity);
+        }
+
+        return colors;
+    }
+
+    private Color[] MakeOpaqueColors(Material[] materials)
+    {
+        Color[] colors = new Color[materials.Length];
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            Color materialColor = materials[i].color;
+
+            colors[i] = new Color(materialColor.r, materialColor.g, materialColor.b, 1f);
+        }
+
+        return colors;
+    }
+
+    private void LerpTransparency()
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = Color.Lerp(materials[i].color, transparentColors[i], fadeInSpeed * Time.deltaTime);
+        }
+    }
+
+    private void LerpOpaqueness()
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = Color.Lerp(materials[i].color, opaqueColors[i], fadeOutSpeed * Time.deltaTime);
+        }
     }
 
     private void MakeMaterialsTransparent()
@@ -78,14 +158,14 @@ public class Obstruction : MonoBehaviour
             material.DisableKeyword("_ALPHATEST_ON");
     }
 
-    private void SetMaterialProperties(Material material)
+    private void SetMaterialProperties(Material material)// -> https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
     {
         SurfaceType surfaceType = (SurfaceType) material.GetFloat("_Surface");
 
         if (surfaceType == SurfaceType.Opaque)
             SetupOpaqueMaterial(material);
 
-        else // -> https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
+        else 
             SetupAlphaTransparentMaterial(material);
     }
 

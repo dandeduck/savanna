@@ -523,6 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  opacity: 0.1
 --- !u!1001 &607984515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -833,6 +835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  opacity: 0.1
 --- !u!1001 &910746560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -979,6 +983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 1
+  opacity: 0.1
 --- !u!1 &981443856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  opacity: 0.1
 --- !u!1 &1682951150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,6 +1789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  opacity: 0.1
 --- !u!4 &1999673681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012848826022, guid: 78af3a7aad589fa49b8fb946c9e57362, type: 3}
@@ -1808,6 +1818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fb6d521f322b94b892990bd54c309f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  opacity: 0.1
 --- !u!1 &2046189613
 GameObject:
   m_ObjectHideFlags: 0
