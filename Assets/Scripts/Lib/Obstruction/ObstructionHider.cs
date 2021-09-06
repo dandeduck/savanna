@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnvironmentHider : MonoBehaviour
+public class ObstructionHider : MonoBehaviour
 {
     private Obstruction lastObstructing;
     private Obstruction collidedObstructing;
