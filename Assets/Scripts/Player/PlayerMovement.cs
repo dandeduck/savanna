@@ -29,9 +29,7 @@ public class PlayerMovement : Moveable
         stamina.Replenish(Time.deltaTime);
 
         if (input.Crouching())
-        {
             return crouchSpeed;
-        }
 
         return walkSpeed;
     }

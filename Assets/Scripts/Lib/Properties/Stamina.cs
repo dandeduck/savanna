@@ -28,9 +28,7 @@ public class Stamina : MonoBehaviour
         value = Mathf.Max(value - timeUsed, 0);
 
         if (value == 0)
-        {
             isExhausted = true;
-        }
     }
 
     public void Replenish(float timeReplenished)
@@ -38,8 +36,6 @@ public class Stamina : MonoBehaviour
         value = Mathf.Min(value + timeReplenished * replenishmentRate, staminaCapacity);
 
         if (value == staminaCapacity)
-        {
             isExhausted = false;
-        }
     }
 }

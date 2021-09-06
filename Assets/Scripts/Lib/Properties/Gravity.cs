@@ -12,8 +12,6 @@ public class Gravity : MonoBehaviour
     private void Update()
     {
         if (!controller.isGrounded)
-        {
             controller.Move(Physics.gravity * Time.deltaTime);
-        }
     }
 }
