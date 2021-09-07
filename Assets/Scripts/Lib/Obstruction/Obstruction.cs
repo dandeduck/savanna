@@ -39,10 +39,10 @@ public class Obstruction : MonoBehaviour
 
     public void MakeVisible()
     {
-        if (!isOpaque)
-            StartCoroutine(FadeIn());
-            
         shouldBeOpaque = true;
+
+        if (!isOpaque)
+            StartCoroutine(FadeIn());    
     }
 
     private IEnumerator FadeIn()
@@ -51,7 +51,7 @@ public class Obstruction : MonoBehaviour
 
         if (shouldBeOpaque)
         {
-            while (HasReachedOpaqueness())
+            while (!HasReachedOpaqueness())
             {
                 LerpOpaqueness();
                 yield return null;
@@ -77,7 +77,7 @@ public class Obstruction : MonoBehaviour
 
     private bool HasReachedTransparency()
     {
-        return materials[materials.Length-1].color.a <= opacity;   
+        return materials[materials.Length-1].color.a <= opacity + 0.01f;   
     }
 
     private Color[] MakeTransparentColors(Material[] materials)
