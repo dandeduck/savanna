@@ -3,15 +3,11 @@ using System.Collections;
 
 public class Obstruction : MonoBehaviour
 {
-    private const float WaitBeforeOpaque = 0.1f;
-
     [SerializeField] private float fadeInSpeed = 20f;
-    [SerializeField] private float fadeOutSpeed = 1000f;
     [SerializeField] private float opacity = 0.1f;
 
     private Material[] materials;
     private bool isOpaque;
-    private bool shouldBeOpaque;
 
     private Color[] transparentColors;
     private Color[] opaqueColors;
@@ -20,7 +16,6 @@ public class Obstruction : MonoBehaviour
     {
         materials = GetComponent<Renderer>().materials;
         isOpaque = true;
-        shouldBeOpaque = true;
 
         transparentColors = MakeTransparentColors(materials);
         opaqueColors = MakeOpaqueColors(materials);
@@ -30,40 +25,27 @@ public class Obstruction : MonoBehaviour
     {
         if (isOpaque)
         {
+            isOpaque = false;
+
             MakeMaterialsTransparent();
             StartCoroutine(FadeOut());
         }
-
-        shouldBeOpaque = false;
     }
 
     public void MakeVisible()
     {
-        shouldBeOpaque = true;
-
         if (!isOpaque)
-            StartCoroutine(FadeIn());    
-    }
-
-    private IEnumerator FadeIn()
-    {
-        yield return new WaitForSeconds(WaitBeforeOpaque);
-
-        if (shouldBeOpaque)
         {
-            while (!HasReachedOpaqueness())
-            {
-                LerpOpaqueness();
-                yield return null;
-            }
-        
-            MakeMaterialsOpaque();
+            isOpaque = true;
+
+            MakeMaterialsOpaque();   
+            SetOpaqueness();
         }
     }
 
     private IEnumerator FadeOut()
     {
-        while (!HasReachedTransparency())
+        while (!HasReachedTransparency() && !isOpaque)
         {
             LerpTransparency();
             yield return null;
@@ -116,11 +98,11 @@ public class Obstruction : MonoBehaviour
         }
     }
 
-    private void LerpOpaqueness()
+    private void SetOpaqueness()
     {
         for (int i = 0; i < materials.Length; i++)
         {
-            materials[i].color = Color.Lerp(materials[i].color, opaqueColors[i], fadeOutSpeed * Time.deltaTime);
+            materials[i].color = opaqueColors[i];
         }
     }
 
@@ -131,8 +113,6 @@ public class Obstruction : MonoBehaviour
             MakeMaterialTransparent(materials[i]);
             SetupMaterialBlendMode(materials[i]);
         }
-
-        isOpaque = false;
     }
 
     private void MakeMaterialTransparent(Material material)
@@ -148,8 +128,6 @@ public class Obstruction : MonoBehaviour
             MakeMaterialOpaque(materials[i]);
             SetupMaterialBlendMode(materials[i]);
         }
-
-        isOpaque = true;
     }
 
     private void MakeMaterialOpaque(Material material)
