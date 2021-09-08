@@ -4,7 +4,6 @@ using System.Collections;
 public class Obstruction : MonoBehaviour
 {
     [SerializeField] private float fadeInSpeed = 20f;
-    [SerializeField] private float fadeOutSpeed = 1000f;
     [SerializeField] private float opacity = 0.1f;
 
     private Material[] materials;
@@ -26,6 +25,8 @@ public class Obstruction : MonoBehaviour
     {
         if (isOpaque)
         {
+            isOpaque = false;
+
             MakeMaterialsTransparent();
             StartCoroutine(FadeOut());
         }
@@ -34,23 +35,17 @@ public class Obstruction : MonoBehaviour
     public void MakeVisible()
     {
         if (!isOpaque)
-            StartCoroutine(FadeIn());    
-    }
-
-    private IEnumerator FadeIn()
-    {
-        while (!HasReachedOpaqueness())
         {
-            LerpOpaqueness();
-            yield return null;
+            isOpaque = true;
+
+            MakeMaterialsOpaque();   
+            SetOpaqueness();
         }
-    
-        MakeMaterialsOpaque();
     }
 
     private IEnumerator FadeOut()
     {
-        while (!HasReachedTransparency())
+        while (!HasReachedTransparency() && !isOpaque)
         {
             LerpTransparency();
             yield return null;
@@ -103,11 +98,11 @@ public class Obstruction : MonoBehaviour
         }
     }
 
-    private void LerpOpaqueness()
+    private void SetOpaqueness()
     {
         for (int i = 0; i < materials.Length; i++)
         {
-            materials[i].color = Color.Lerp(materials[i].color, opaqueColors[i], fadeOutSpeed * Time.deltaTime);
+            materials[i].color = opaqueColors[i];
         }
     }
 
@@ -118,8 +113,6 @@ public class Obstruction : MonoBehaviour
             MakeMaterialTransparent(materials[i]);
             SetupMaterialBlendMode(materials[i]);
         }
-
-        isOpaque = false;
     }
 
     private void MakeMaterialTransparent(Material material)
@@ -135,8 +128,6 @@ public class Obstruction : MonoBehaviour
             MakeMaterialOpaque(materials[i]);
             SetupMaterialBlendMode(materials[i]);
         }
-
-        isOpaque = true;
     }
 
     private void MakeMaterialOpaque(Material material)
