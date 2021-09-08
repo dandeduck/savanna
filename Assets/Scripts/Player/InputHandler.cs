@@ -29,6 +29,16 @@ public class InputHandler : MonoBehaviour
         return Vector3.zero;
     }
 
+    public RaycastHit AimRaycast()
+    {
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        
+        Physics.Raycast(cameraRay, out hit);
+
+        return hit;
+    }
+
     public bool Sprinting()
     {
         return Input.GetKey(KeyCode.LeftShift);
