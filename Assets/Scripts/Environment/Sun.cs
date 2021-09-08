@@ -21,7 +21,10 @@ public class Sun : MonoBehaviour
         currentAngle = 0;
         sunlight.color = dayColor;
 
-        degreesPreSecond = 180f / dayLengthMinutes / 60f;
+        if (dayLengthMinutes == 0)
+            degreesPreSecond = 0;
+        else
+            degreesPreSecond = 180f / dayLengthMinutes / 60f;
     }
 
     private void Update()
