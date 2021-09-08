@@ -3,15 +3,12 @@ using System.Collections;
 
 public class Obstruction : MonoBehaviour
 {
-    private const float WaitBeforeOpaque = 0.1f;
-
     [SerializeField] private float fadeInSpeed = 20f;
     [SerializeField] private float fadeOutSpeed = 1000f;
     [SerializeField] private float opacity = 0.1f;
 
     private Material[] materials;
     private bool isOpaque;
-    private bool shouldBeOpaque;
 
     private Color[] transparentColors;
     private Color[] opaqueColors;
@@ -20,7 +17,6 @@ public class Obstruction : MonoBehaviour
     {
         materials = GetComponent<Renderer>().materials;
         isOpaque = true;
-        shouldBeOpaque = true;
 
         transparentColors = MakeTransparentColors(materials);
         opaqueColors = MakeOpaqueColors(materials);
@@ -33,32 +29,23 @@ public class Obstruction : MonoBehaviour
             MakeMaterialsTransparent();
             StartCoroutine(FadeOut());
         }
-
-        shouldBeOpaque = false;
     }
 
     public void MakeVisible()
     {
-        shouldBeOpaque = true;
-
         if (!isOpaque)
             StartCoroutine(FadeIn());    
     }
 
     private IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(WaitBeforeOpaque);
-
-        if (shouldBeOpaque)
+        while (!HasReachedOpaqueness())
         {
-            while (!HasReachedOpaqueness())
-            {
-                LerpOpaqueness();
-                yield return null;
-            }
-        
-            MakeMaterialsOpaque();
+            LerpOpaqueness();
+            yield return null;
         }
+    
+        MakeMaterialsOpaque();
     }
 
     private IEnumerator FadeOut()
