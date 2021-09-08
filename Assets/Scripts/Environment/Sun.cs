@@ -8,7 +8,6 @@ public class Sun : MonoBehaviour
     [SerializeField] private Color dayColor = new Color(1f, 1f, 1f);
     [SerializeField] private Color transitionColor = new Color(0.901f, 0.454f, 0.317f);
     [SerializeField] private Color nightColor = new Color(0.25f, 0.25f, 0.6f);
-    [SerializeField] private Light moon;
     
     private Light sunlight;
     private float degreesPreSecond;
@@ -23,36 +22,27 @@ public class Sun : MonoBehaviour
         sunlight.color = dayColor;
 
         degreesPreSecond = 180f / dayLengthMinutes / 60f;
-        Debug.Log(degreesPreSecond);
     }
 
     private void Update()
     { 
-        float degreesToTravel = Time.deltaTime * degreesPreSecond;
+        if (degreesPreSecond == 0)
+            return;
+
+        float travelSpeed = TravelSpeed();
         Color newSunlightColor = DetermineNewSunlightColor();
 
-        if (currentAngle > 175)
-        {
-            sunlight.intensity = Mathf.Lerp(sunlight.intensity, 0, degreesToTravel);
-            moon.intensity = Mathf.Lerp(moon.intensity, 1, degreesToTravel);
-        }
-        else
-        {
-            sunlight.intensity = Mathf.Lerp(sunlight.intensity, 1, degreesToTravel * 2);
-            moon.intensity = Mathf.Lerp(moon.intensity, 0, degreesToTravel * 2);
-        }
+        AdjustSun(newSunlightColor, travelSpeed);
+    }
 
-        AdjustSun(newSunlightColor, degreesToTravel);
+    public float TravelSpeed()
+    {
+        return Time.deltaTime * degreesPreSecond;
     }
 
     public bool IsDaytime()
     {
-        return currentAngle > 0 && currentAngle < 170;
-    }
-
-    public bool IsNightTime()
-    {
-        return currentAngle > 180;
+        return currentAngle >= 0 && currentAngle <= 175;
     }
 
     private Color DetermineNewSunlightColor()
@@ -69,11 +59,21 @@ public class Sun : MonoBehaviour
         return nightColor;
     }
 
-    private void AdjustSun(Color sunlightColor, float degreesToTravel)
+    private void AdjustSunIntensity(float travelSpeed)
     {
-        sunlight.color = Color.Lerp(sunlight.color, sunlightColor, degreesToTravel);
-        transform.Rotate(degreesToTravel, 0, 0, Space.Self);
+        if (currentAngle > 175)
+            sunlight.intensity = Mathf.Lerp(sunlight.intensity, 0, travelSpeed);
+        else
+            sunlight.intensity = Mathf.Lerp(sunlight.intensity, 1, travelSpeed * 2);
+    }
 
-        currentAngle = (currentAngle + degreesToTravel) % 360;
+    private void AdjustSun(Color sunlightColor, float travelSpeed)
+    {
+        sunlight.color = Color.Lerp(sunlight.color, sunlightColor, travelSpeed);
+        transform.Rotate(travelSpeed, 0, 0, Space.Self);
+
+        AdjustSunIntensity(travelSpeed);
+
+        currentAngle = (currentAngle + travelSpeed) % 360;
     }
 }

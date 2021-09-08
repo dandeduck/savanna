@@ -758,6 +758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1376227218}
   - component: {fileID: 1376227217}
+  - component: {fileID: 1376227219}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
@@ -777,7 +778,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.03203987, g: 0.03203987, b: 0.4528302, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -841,6 +842,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 175, y: -30, z: 0}
+--- !u!114 &1376227219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376227216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48354c9ad69b2074ab22cfc9cd888c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1491652049}
 --- !u!1001 &1452016873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -903,6 +917,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6913347984426527867, guid: c59e99a3b6948424292a6c639afabe94, type: 3}
   m_PrefabInstance: {fileID: 1452016873}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1491652049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+  m_PrefabInstance: {fileID: 3777910452776057297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ff6cb650d83e64c816a0da0d03f33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1682951150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1379,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1376227217}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+      propertyPath: dayColor.b
+      value: 0.8901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+      propertyPath: dayColor.g
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: nightColor.b
       value: 0.4509804
       objectReference: {fileID: 0}
@@ -1387,23 +1420,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9659259
+      value: 0.81668144
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.51579475
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.258819
+      value: -0.21882911
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.1382068
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 64.551
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1412,6 +1445,14 @@ PrefabInstance:
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.972549
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_Enabled
