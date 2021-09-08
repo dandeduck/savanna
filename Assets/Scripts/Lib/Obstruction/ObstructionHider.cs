@@ -1,72 +1,65 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ObstructionHider : MonoBehaviour
 {
-    private Obstruction lastObstructing;
-    private Obstruction collidedObstructing;
+    private List<Obstruction> lastObstructions;
 
-    private void OnTriggerEnter(Collider collider)
+    private void Start()
     {
-        Obstruction obstructing = collider.GetComponent<Obstruction>();
-
-        if (obstructing != null)
-        {
-            collidedObstructing = obstructing;
-            collidedObstructing.MakeTransparent();
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        Obstruction obstructing = collider.GetComponent<Obstruction>();
-
-        if (obstructing != null)
-            obstructing.MakeVisible();
+        lastObstructions = new List<Obstruction>();
     }
 
     private void Update()
     {
-        Obstruction obstructing = GetClosestObstruction();
+        List<Obstruction> newObstructions = GetObstructions();
 
-        if (obstructing != null)
-            HandleObstruction(obstructing);
-        else
-            HandleNoObstruction();
+        MakeOldObstructionsVisible(newObstructions);
+        MakeObstructionsTransparent(newObstructions);
+
+        lastObstructions = newObstructions;
     }
 
-    private Obstruction GetClosestObstruction()
+    private List<Obstruction> GetObstructions()
     {
         Ray cameraRay = Camera.main.ViewportPointToRay(Camera.main.WorldToViewportPoint(transform.position));
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        RaycastHit hit = new RaycastHit();
+        RaycastHit[] hits = Physics.RaycastAll(cameraRay);
 
-        Physics.Raycast(cameraRay, out hit);
-
-        return hit.transform.GetComponent<Obstruction>();
+        return ConvertHits(hits);
     }
 
-    private void HandleObstruction(Obstruction obstructing)
+    private List<Obstruction> ConvertHits(RaycastHit[] hits)
     {
-        obstructing.MakeTransparent();
+        List<Obstruction> obstructions = new List<Obstruction>();
 
-        if (obstructing != lastObstructing)
-            HandleNewObstruction(obstructing);
-    }
-
-    private void HandleNewObstruction(Obstruction obstructing)
-    {
-        if (lastObstructing != null && lastObstructing != collidedObstructing)
-            lastObstructing.MakeVisible();
-
-        lastObstructing = obstructing;
-    }
-
-    private void HandleNoObstruction()
-    {
-        if (lastObstructing != null)
+        for (int i = 0; i < hits.Length; i++)
         {
-            lastObstructing.MakeVisible();
-            lastObstructing = null;
+            Obstruction obstruction = hits[i].transform.GetComponent<Obstruction>();
+
+            if (obstruction != null)
+                obstructions.Add(obstruction);
+        }
+
+        return obstructions;
+    }
+
+    private void MakeOldObstructionsVisible(List<Obstruction> newObstructions)
+    {
+        for (int i = 0; i < lastObstructions.Count; i++)
+        {
+            Obstruction lastObstruction = lastObstructions[i];
+            
+            if (!newObstructions.Contains(lastObstruction))
+                lastObstruction.MakeVisible();
+        }
+    }
+
+    private void MakeObstructionsTransparent(List<Obstruction> obstructions)
+    {
+        for (int i = 0; i < obstructions.Count; i++)
+        {
+            obstructions[i].MakeTransparent();
         }
     }
 }
