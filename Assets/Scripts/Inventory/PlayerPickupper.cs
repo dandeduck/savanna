@@ -77,7 +77,7 @@ public class PlayerPickupper : MonoBehaviour
 
     private void Pickup()
     {
-        if (pickupables.Count > 0)
+        if (pickupables.Contains(selected))
         {
             inventories.Pickup(selected);
             pickupables.Remove(selected);
