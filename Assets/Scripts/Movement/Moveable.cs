@@ -39,7 +39,7 @@ public abstract class Moveable : MonoBehaviour
 
     public virtual Vector3 Velocity()
     {
-        return currentDirection * currentSpeed;
+        return controller.velocity;
     }
 
     public bool IsStopping()
