@@ -5,13 +5,14 @@ using UnityEngine;
 public class Moon : MonoBehaviour
 {
     [SerializeField] private Sun sun;
-
-    private Light moonlight;
+    [SerializeField] private Light moonlight;
     
     private void Start()
     {
+        if (moonlight == null)
+            moonlight = GetComponent<Light>();
+
         transform.rotation = Quaternion.Euler(175, -30, 0);    
-        moonlight = GetComponent<Light>();
         moonlight.intensity = 0;
     }
 

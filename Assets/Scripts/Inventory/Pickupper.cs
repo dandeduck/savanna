@@ -3,14 +3,19 @@ using System.Collections.Generic;
 
 public class Pickupper : MonoBehaviour
 {
-    [SerializeField] InputHandler input;
     [SerializeField] InventoryManager inventories;
+    [SerializeField] InputHandler input;
 
     private List<Pickupable> pickupables;
     private Pickupable selected;
 
     private void Start()
     {
+        if (input == null)
+            input = GetComponent<InputHandler>();
+        if (inventories == null)
+            inventories = GetComponent<InventoryManager>();
+
         pickupables = new List<Pickupable>();
     }
 

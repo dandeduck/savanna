@@ -8,14 +8,15 @@ public class Sun : MonoBehaviour
     [SerializeField] private Color dayColor = new Color(1f, 1f, 1f);
     [SerializeField] private Color transitionColor = new Color(0.901f, 0.454f, 0.317f);
     [SerializeField] private Color nightColor = new Color(0.25f, 0.25f, 0.6f);
-    
-    private Light sunlight;
+    [SerializeField] private Light sunlight;
+
     private float degreesPreSecond;
     private float currentAngle;
 
     private void Start()
     {
-        sunlight = GetComponent<Light>();
+        if (sunlight == null)
+            sunlight = GetComponent<Light>();
 
         transform.rotation = Quaternion.Euler(0, -30, 0);
         currentAngle = 0;
