@@ -41,7 +41,10 @@ public class Pickupper : MonoBehaviour
 
     private Pickupable GetSelected()
     {
-        return input.AimRaycast().transform.GetComponent<Pickupable>();
+        if (input.HasAim())
+            return input.AimRaycast().transform.GetComponent<Pickupable>();
+        else
+            return pickupables[0];
     }
 
     private void Pickup()
@@ -51,7 +54,6 @@ public class Pickupper : MonoBehaviour
             Pickupable pickupable = pickupables[0];
 
             inventories.Pickup(pickupable);
-
             pickupables.Remove(pickupable);
             selected = null;
         }
