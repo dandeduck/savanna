@@ -14,6 +14,11 @@ public class InputHandler : MonoBehaviour
         return Input.GetAxisRaw("Vertical");
     }
 
+    public bool HasAim()
+    {
+        return true;
+    }
+
     public Vector3 AimDirection()
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);

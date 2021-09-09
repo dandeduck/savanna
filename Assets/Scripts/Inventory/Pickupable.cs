@@ -9,13 +9,6 @@ public abstract class Pickupable : MonoBehaviour
     private void Start()
     {
         amount = 0;
-
-        OnStart();
-    }
-
-    private void Update()
-    {
-        OnUpdate();
     }
 
     public int Pickup()
@@ -30,7 +23,5 @@ public abstract class Pickupable : MonoBehaviour
         this.amount = amount;
     }
 
-    protected virtual void OnStart() {}
-    protected virtual void OnUpdate() {}
-    protected virtual void OnPickup() {}
+    protected abstract void OnPickup();
 }
