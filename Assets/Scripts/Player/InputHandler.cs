@@ -14,6 +14,11 @@ public class InputHandler : MonoBehaviour
         return Input.GetAxisRaw("Vertical");
     }
 
+    public bool HasAim()
+    {
+        return true;
+    }
+
     public Vector3 AimDirection()
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -27,6 +32,28 @@ public class InputHandler : MonoBehaviour
         }
 
         return Vector3.zero;
+    }
+
+    public RaycastHit AimRaycast()
+    {
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        
+        Physics.Raycast(cameraRay, out hit);
+
+        return hit;
+    }
+
+    public RaycastHit[] AimRaycastAll()
+    {
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        return Physics.RaycastAll(cameraRay);
+    }
+
+    public bool PickingUp()
+    {
+        return Input.GetMouseButtonDown(1);
     }
 
     public bool Sprinting()

@@ -5,7 +5,7 @@ public class PlayerMovement : Moveable
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float crouchSpeed;
-
+    
     private InputHandler input;
     private Stamina stamina;
 

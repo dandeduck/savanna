@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAiming : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-
+    
     private Moveable player;
     private Vector3 lastDirection;
 
