@@ -35,7 +35,7 @@ public abstract class Moveable : MonoBehaviour
         return acceleration;
     }
 
-    public Vector3 Velocity()
+    public virtual Vector3 Velocity()
     {
         return currentDirection * currentSpeed;
     }
@@ -68,7 +68,7 @@ public abstract class Moveable : MonoBehaviour
 
     private void MoveForward()
     {
-         isStopping = false;
+        isStopping = false;
         prevDirection = currentDirection;
         currentSpeed = Mathf.Min(MaxVelocity(), currentSpeed + acceleration * Time.deltaTime);
         controller.Move(currentDirection * currentSpeed * Time.deltaTime);

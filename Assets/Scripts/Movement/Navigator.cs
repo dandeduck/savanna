@@ -17,9 +17,17 @@ public abstract class Navigator : Moveable
         Navigate(transform.position);
     }
 
+    public override Vector3 Velocity()
+    {
+        if (IsNavigating())
+            return agent.velocity;
+        else
+            return base.Velocity();
+    }
+
     public void Navigate(Vector3 destination)
     {
-        if (currentRoutine != null && !agent.isStopped)
+        if (IsNavigating())
             StopCoroutine(currentRoutine);
 
         currentRoutine = Navigation(destination);
@@ -40,5 +48,11 @@ public abstract class Navigator : Moveable
 
         agent.isStopped = true;
         UnLock();
+    }
+
+
+    private bool IsNavigating()
+    {
+        return currentRoutine != null && !agent.isStopped;
     }
 }
