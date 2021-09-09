@@ -13,7 +13,6 @@ public class Collectable : Pickupable
 
     protected override void OnPickup()
     {
-        Debug.Log("On pickup collectable");
         meshRenderer.enabled = false;
         objectCollider.enabled = false;
     }

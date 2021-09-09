@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour
 
     public bool Pickup(Pickupable pickedUp)
     {
-        Debug.Log("On pickup inventory " + pickedUp);
         if (items.Count == size)
             return false;
 
@@ -46,7 +45,7 @@ public class Inventory : MonoBehaviour
         if (items.ContainsKey(type))
         {
             Pickupable item = items[type];
-            
+
             if (amount > item.Amount())
                 return false;
 

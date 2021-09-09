@@ -5,15 +5,14 @@ public class PlayerMovement : Moveable
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float crouchSpeed;
-    [SerializeField] private InputHandler input;
-    [SerializeField] private Stamina stamina;
+    
+    private InputHandler input;
+    private Stamina stamina;
 
     protected override void OnStart()
     {
-        if (input == null)
-            input = GetComponent<InputHandler>();
-        if (stamina == null)
-            stamina = GetComponent<Stamina>();
+        input = GetComponent<InputHandler>();
+        stamina = GetComponent<Stamina>();
     }
 
     protected override float MaxSpeed()

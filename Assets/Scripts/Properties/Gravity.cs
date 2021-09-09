@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
+    private CharacterController controller;
 
     private void Start()
     {
-        if (controller == null)
-            controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
 
     private void Update()

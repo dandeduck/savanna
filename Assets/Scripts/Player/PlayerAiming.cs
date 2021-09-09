@@ -3,14 +3,13 @@ using UnityEngine;
 public class PlayerAiming : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private Moveable player;
     
+    private Moveable player;
     private Vector3 lastDirection;
 
     private void Start()
     {
-        if (player == null)
-            player = GetComponent<Moveable>();
+        player = GetComponent<Moveable>();
         lastDirection = Vector3.zero;
     }
 

@@ -13,8 +13,7 @@ public abstract class Moveable : MonoBehaviour
     
     private void Start()
     {
-        if (controller == null)
-            controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
 
         currentSpeed = 0;
         prevDirection = transform.position;   
