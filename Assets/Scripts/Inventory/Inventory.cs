@@ -12,6 +12,11 @@ public class Inventory : MonoBehaviour
         items = new Dictionary<string, Pickupable>();
     }
 
+    public Dictionary<string, Pickupable> Items()
+    {
+        return items;
+    }
+
     public bool Pickup(Pickupable pickedUp)
     {
         if (items.Count == size)

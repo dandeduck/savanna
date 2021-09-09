@@ -3,12 +3,13 @@ using UnityEngine;
 public abstract class Pickupable : MonoBehaviour
 {
     [SerializeField] private string type;
+    [SerializeField] private int initialAmount = 0;
 
     private int amount;
     
     private void Start()
     {
-        amount = 0;
+        amount = initialAmount;
 
         OnStart();
     }
