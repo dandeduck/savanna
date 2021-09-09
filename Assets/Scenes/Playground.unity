@@ -1771,7 +1771,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3
-  m_Acceleration: 6
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0.5
@@ -2079,11 +2079,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5877653098079884584, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: walkSpeed
-      value: 1.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877653098079884584, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: crouchSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5877653098079884584, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: acceleration
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5877653098079884584, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: deceleration

@@ -70,7 +70,6 @@ public abstract class Moveable : MonoBehaviour
 
     private void MoveForward()
     {
-        Debug.Log(currentDirection);
         isStopping = false;
         prevDirection = currentDirection;
         currentSpeed = Mathf.Min(MaxVelocity(), currentSpeed + acceleration * Time.deltaTime);
@@ -80,7 +79,7 @@ public abstract class Moveable : MonoBehaviour
     private void MoveBackwards()
     {
         isStopping = true;
-        currentSpeed = Mathf.Max(0, currentSpeed - acceleration * Time.deltaTime);
+        currentSpeed = Mathf.Max(0, currentSpeed - acceleration * 2 * Time.deltaTime);
         controller.Move(prevDirection * currentSpeed * Time.deltaTime);
     }
 
