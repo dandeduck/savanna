@@ -1,26 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Moon : MonoBehaviour
+public class Moon : CelestialBody
 {
-    [SerializeField] private Sun sun;
-    
-    private Light moonlight;
-    
-    private void Start()
+    protected override float InitialAngle()
     {
-        moonlight = GetComponent<Light>();
-
-        transform.rotation = Quaternion.Euler(175, -30, 0);    
-        moonlight.intensity = 0;
-    }
-
-    private void Update()
-    {
-        if (sun.IsDaytime())
-            moonlight.intensity = Mathf.Lerp(moonlight.intensity, 0, sun.TravelSpeed() * 2);
-        else
-            moonlight.intensity = Mathf.Lerp(moonlight.intensity, 1, sun.TravelSpeed() * 2);
+        return 180f;
     }
 }

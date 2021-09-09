@@ -747,11 +747,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 50067275123475307, guid: c267944c10fc0804a8e6cf0cc9af3982, type: 3}
   m_PrefabInstance: {fileID: 1317862321}
   m_PrefabAsset: {fileID: 0}
---- !u!108 &1376227217 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
-  m_PrefabInstance: {fileID: 6523270133447905884}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1452016873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -814,17 +809,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6913347984426527867, guid: c59e99a3b6948424292a6c639afabe94, type: 3}
   m_PrefabInstance: {fileID: 1452016873}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1491652049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
-  m_PrefabInstance: {fileID: 3777910452776057297}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ff6cb650d83e64c816a0da0d03f33e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1682951150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1316,7 @@ PrefabInstance:
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: moon
       value: 
-      objectReference: {fileID: 1376227217}
+      objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.b
       value: 1
@@ -1347,19 +1331,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: nightColor.b
-      value: 0.4509804
+      value: 0.2627451
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: nightColor.g
-      value: 0.03137255
+      value: 0.015686275
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: nightColor.r
-      value: 0.03137255
+      value: 0.015686275
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayLengthMinutes
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
+      propertyPath: halfCycleLengthMinutes
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_RootOrder
@@ -1569,7 +1557,11 @@ PrefabInstance:
     - target: {fileID: 6523270132609080783, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: sun
       value: 
-      objectReference: {fileID: 1491652049}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523270132609080783, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
+      propertyPath: halfCycleLengthMinutes
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
 --- !u!1 &6641690076443898213

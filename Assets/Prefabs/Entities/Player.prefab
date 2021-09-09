@@ -58,7 +58,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!54 &5877653098079884577
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92,8 +92,6 @@ MonoBehaviour:
   runSpeed: 5
   walkSpeed: 2.5
   crouchSpeed: 1.5
-  input: {fileID: 0}
-  stamina: {fileID: 0}
 --- !u!114 &5877653098079884591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  player: {fileID: 0}
 --- !u!114 &5877653098079884589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5dbb6a4e62fe147a12a8e8b929b4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
 --- !u!114 &5877653098079884578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventories: {fileID: 0}
-  input: {fileID: 0}
 --- !u!136 &7614351719484173283
 CapsuleCollider:
   m_ObjectHideFlags: 0
