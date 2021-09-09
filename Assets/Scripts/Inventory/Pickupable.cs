@@ -40,7 +40,7 @@ public abstract class Pickupable : MonoBehaviour
         pickupable.SetAmount(amountDropped);
 
         if (amount <= 0)
-            Destroy(this, Time.deltaTime);
+            Destroy(this.gameObject, Time.deltaTime);
     }
 
     public void SetAmount(int amount)
@@ -53,14 +53,14 @@ public abstract class Pickupable : MonoBehaviour
         this.amount -= amount;
 
         if (amount <= 0)
-            Destroy(this, Time.deltaTime);
+            Destroy(this.gameObject, Time.deltaTime);
     }
 
     public void Merge(Pickupable pickupable)
     {
         amount += pickupable.Amount();
 
-        Destroy(pickupable, Time.deltaTime);
+        Destroy(pickupable.gameObject, Time.deltaTime);
     }
 
     protected virtual void OnStart() {}
