@@ -38,11 +38,10 @@ public abstract class Navigator : Moveable
     {
         Lock();
         agent.isStopped = false;
+        agent.SetDestination(destination);
 
         do
         {
-            agent.SetDestination(destination);
-
             yield return null;
         } while (agent.remainingDistance > agent.stoppingDistance);
 

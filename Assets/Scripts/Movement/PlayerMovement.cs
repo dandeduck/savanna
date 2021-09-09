@@ -7,29 +7,19 @@ public class PlayerMovement : Navigator
     [SerializeField] private float crouchSpeed;
     
     private InputHandler input;
-    private Stamina stamina;
 
     protected override void OnStart()
     {
         base.OnStart();
 
         input = GetComponent<InputHandler>();
-        stamina = GetComponent<Stamina>();
 
     }
 
     protected override float MaxVelocity()
     {
         if (input.Sprinting())
-        {
-            if (!stamina.IsExhausted())
-            {
-                stamina.Consume(Time.deltaTime);
-                return runSpeed;
-            }
-        }
-
-        stamina.Replenish(Time.deltaTime);
+            return runSpeed;
 
         if (input.Crouching())
             return crouchSpeed;

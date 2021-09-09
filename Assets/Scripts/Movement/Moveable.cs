@@ -28,6 +28,8 @@ public abstract class Moveable : MonoBehaviour
     {
         if (!isLocked)
             Move();
+        else
+            currentDirection = Vector3.zero;
     }
 
     public float Acceleration()
@@ -68,6 +70,7 @@ public abstract class Moveable : MonoBehaviour
 
     private void MoveForward()
     {
+        Debug.Log(currentDirection);
         isStopping = false;
         prevDirection = currentDirection;
         currentSpeed = Mathf.Min(MaxVelocity(), currentSpeed + acceleration * Time.deltaTime);
