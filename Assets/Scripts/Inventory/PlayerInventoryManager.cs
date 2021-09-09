@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class InventoryManager : MonoBehaviour
+public class PlayerInventoryManager : MonoBehaviour
 {
     [SerializeField] Inventory lowbar;
 

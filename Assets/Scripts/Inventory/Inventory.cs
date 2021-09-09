@@ -37,10 +37,9 @@ public class Inventory : MonoBehaviour
         if (items.ContainsKey(type))
         {
             Pickupable item = items[type];
-
             item.Drop(amountDropped, transform.position);
 
-            if (amountDropped == item.Amount())
+            if (item.Amount() == 0)
                 items.Remove(type);
         }
     }

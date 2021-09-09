@@ -39,6 +39,8 @@ public abstract class Pickupable : MonoBehaviour
         Pickupable pickupable = Instantiate<Pickupable>(this, dropPosition, Quaternion.Euler(0,0,0));
         pickupable.SetAmount(amountDropped);
 
+        OnDrop(pickupable);
+
         if (amount <= 0)
             Destroy(this.gameObject, Time.deltaTime);
     }
@@ -65,5 +67,5 @@ public abstract class Pickupable : MonoBehaviour
 
     protected virtual void OnStart() {}
     protected abstract void OnPickup();
-    protected virtual void OnDrop(Pickupable droppedItem) {}
+    protected abstract void OnDrop(Pickupable droppedItem);
 }

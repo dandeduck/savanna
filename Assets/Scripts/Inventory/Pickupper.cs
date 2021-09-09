@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Pickupper : MonoBehaviour
 {
-    [SerializeField] InventoryManager inventories;
+    PlayerInventoryManager inventories;
     InputHandler input;
 
     private List<Pickupable> pickupables;
@@ -11,6 +11,7 @@ public class Pickupper : MonoBehaviour
 
     private void Start()
     {
+        inventories = GetComponent<PlayerInventoryManager>();
         input = GetComponent<InputHandler>();
 
         pickupables = new List<Pickupable>();

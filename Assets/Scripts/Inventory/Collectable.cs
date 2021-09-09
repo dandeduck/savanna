@@ -16,4 +16,13 @@ public class Collectable : Pickupable
         meshRenderer.enabled = false;
         objectCollider.enabled = false;
     }
+
+    protected override void OnDrop(Pickupable droppedItem)
+    {
+        MeshRenderer newRenderer = droppedItem.GetComponent<MeshRenderer>();
+        Collider newCollider = droppedItem.GetComponent<Collider>();
+
+        newRenderer.enabled = true;
+        newCollider.enabled = true;
+    }
 }

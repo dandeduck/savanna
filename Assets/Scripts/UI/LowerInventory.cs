@@ -3,12 +3,12 @@ using TMPro;
 
 public class LowerInventory : MonoBehaviour
 {
-    private Inventory inventory;
+    [SerializeField] private Inventory inventory;
+    
     private TMP_Text text;
 
     private void Start()
     {
-        inventory = GetComponent<Inventory>();
         text = GetComponent<TMP_Text>();
     }
 
@@ -20,5 +20,8 @@ public class LowerInventory : MonoBehaviour
             amountOfBalls = inventory.Items()["Ball"].Amount();
         
         text.text = $"{amountOfBalls} Balls";
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            inventory.Drop("Ball", 1);
     }
 }
