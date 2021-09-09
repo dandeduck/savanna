@@ -1359,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayLengthMinutes
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_RootOrder
