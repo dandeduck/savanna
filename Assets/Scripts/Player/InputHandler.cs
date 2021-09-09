@@ -44,6 +44,11 @@ public class InputHandler : MonoBehaviour
         return hit;
     }
 
+    public bool PickingUp()
+    {
+        return Input.GetMouseButtonDown(1);
+    }
+
     public bool Sprinting()
     {
         return Input.GetKey(KeyCode.LeftShift);
