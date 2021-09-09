@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Pickupper : MonoBehaviour
+public class PlayerPickupper : MonoBehaviour
 {
     PlayerInventoryManager inventories;
     InputHandler input;
+    Navigator navigator;
 
     private List<Pickupable> pickupables;
     private Pickupable selected;
@@ -13,6 +14,7 @@ public class Pickupper : MonoBehaviour
     {
         inventories = GetComponent<PlayerInventoryManager>();
         input = GetComponent<InputHandler>();
+        navigator = GetComponent<Navigator>();
 
         pickupables = new List<Pickupable>();
     }
@@ -45,7 +47,15 @@ public class Pickupper : MonoBehaviour
     private Pickupable GetSelected()
     {
         if (input.HasAim())
-            return GetAimSelected();
+        {
+            Pickupable aimSelected =  GetAimSelected();
+
+            if (aimSelected != null)
+                navigator.Navigate(aimSelected.transform);
+
+            return aimSelected;
+        }
+
         else
             return pickupables[0];
     }

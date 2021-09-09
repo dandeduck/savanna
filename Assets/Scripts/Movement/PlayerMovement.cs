@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : Moveable
+public class PlayerMovement : Navigator
 {
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
@@ -11,11 +11,14 @@ public class PlayerMovement : Moveable
 
     protected override void OnStart()
     {
+        base.OnStart();
+
         input = GetComponent<InputHandler>();
         stamina = GetComponent<Stamina>();
+
     }
 
-    protected override float MaxSpeed()
+    protected override float MaxVelocity()
     {
         if (input.Sprinting())
         {
