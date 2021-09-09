@@ -21,14 +21,14 @@ public class Pickupper : MonoBehaviour
 
     private void Update()
     {
-        if (input.PickingUp())
+        if (input.PickingUp()) 
             selected = GetSelected();
 
         if (selected != null)
             Pickup();
     }
 
-    private void OnColliderEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
         Pickupable pickupable = collider.GetComponent<Pickupable>();
 
@@ -36,7 +36,7 @@ public class Pickupper : MonoBehaviour
             pickupables.Add(pickupable);
     }
 
-    private void OnColliderExit(Collider collider)
+    private void OnTriggerExit(Collider collider)
     {
         Pickupable pickupable = collider.GetComponent<Pickupable>();
 
@@ -47,19 +47,33 @@ public class Pickupper : MonoBehaviour
     private Pickupable GetSelected()
     {
         if (input.HasAim())
-            return input.AimRaycast().transform.GetComponent<Pickupable>();
+            return GetAimSelected();
         else
             return pickupables[0];
+    }
+
+    private Pickupable GetAimSelected()
+    {
+        RaycastHit[] hits = input.AimRaycastAll();
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Pickupable pickupable = hits[i].transform.GetComponent<Pickupable>();
+
+            if (pickupable != null)
+                return pickupable;
+        }
+
+        return null;
     }
 
     private void Pickup()
     {
         if (pickupables.Count > 0)
         {
-            Pickupable pickupable = pickupables[0];
+            inventories.Pickup(selected);
+            pickupables.Remove(selected);
 
-            inventories.Pickup(pickupable);
-            pickupables.Remove(pickupable);
             selected = null;
         }
     }

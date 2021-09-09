@@ -44,6 +44,13 @@ public class InputHandler : MonoBehaviour
         return hit;
     }
 
+    public RaycastHit[] AimRaycastAll()
+    {
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        return Physics.RaycastAll(cameraRay);
+    }
+
     public bool PickingUp()
     {
         return Input.GetMouseButtonDown(1);

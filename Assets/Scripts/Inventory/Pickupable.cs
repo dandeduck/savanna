@@ -9,6 +9,8 @@ public abstract class Pickupable : MonoBehaviour
     private void Start()
     {
         amount = 0;
+
+        OnStart();
     }
 
     public int Amount()
@@ -60,6 +62,7 @@ public abstract class Pickupable : MonoBehaviour
         Destroy(pickupable, Time.deltaTime);
     }
 
+    protected virtual void OnStart() {}
     protected abstract void OnPickup();
-    protected abstract void OnDrop(Pickupable droppedItem);
+    protected virtual void OnDrop(Pickupable droppedItem) {}
 }

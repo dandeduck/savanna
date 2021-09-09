@@ -14,14 +14,14 @@ public class Inventory : MonoBehaviour
 
     public bool Pickup(Pickupable pickedUp)
     {
+        Debug.Log("On pickup inventory " + pickedUp);
         if (items.Count == size)
             return false;
 
         string type = pickedUp.Type();
-        Pickupable sameItem = items[type];
 
-        if (sameItem != null)
-            sameItem.Merge(pickedUp);
+        if (items.ContainsKey(type))
+            items[type].Merge(pickedUp);
         else
             items.Add(type, pickedUp.Pickup());
 
@@ -30,10 +30,10 @@ public class Inventory : MonoBehaviour
 
     public void Drop(string type, int amountDropped)
     {
-        Pickupable item = items[type];
-
-        if (item != null)
+        if (items.ContainsKey(type))
         {
+            Pickupable item = items[type];
+
             item.Drop(amountDropped, transform.position);
 
             if (amountDropped == item.Amount())
@@ -43,10 +43,10 @@ public class Inventory : MonoBehaviour
 
     public bool Consume(string type, int amount)
     {
-        Pickupable item = items[type];
-
-        if (item != null)
+        if (items.ContainsKey(type))
         {
+            Pickupable item = items[type];
+            
             if (amount > item.Amount())
                 return false;
 
