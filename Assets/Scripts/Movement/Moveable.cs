@@ -48,6 +48,7 @@ public abstract class Moveable : MonoBehaviour
     public void Lock()
     {
         isLocked = true;
+        currentSpeed = 0;
     }
 
     public void UnLock()

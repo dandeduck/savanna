@@ -42,13 +42,19 @@ public abstract class Navigator : Moveable
         aiming.Lock();
         agent.isStopped = false;
         agent.SetDestination(destination);
+        Debug.Log(Velocity());
 
         do
         {
             yield return null;
         } while (agent.remainingDistance > agent.stoppingDistance);
 
-        // UnLock();
+        UnLock();
+        Debug.Log(Velocity());
+        Debug.Log(Direction());
+        yield return null;
+        Debug.Log(Velocity());
+        Debug.Log(Direction());
         aiming.UnLock();
         agent.isStopped = true;
     }
