@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    private const int MapChunkSize = 241;
+    private const int MapChunkSize = 255;
 
     public enum DrawMode {NoiseMap, ColorMap, Mesh};
     public DrawMode drawMode;
@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour
     public bool autoUpdate;
     [Range(0,6)]
     public int levelOfDetail;
+    public bool useFallOffMap;
 
     [SerializeField] private int seed;
     [SerializeField] private float noiseScale;
@@ -26,6 +27,13 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private MapDisplay display;
     [SerializeField] private Gradient terrains;
 
+    private float[,] fallOffMap = ComputeUtil.GenerateFalloffMap(MapChunkSize);
+
+    private void Start()
+    {
+        GenerateMap();
+    }
+
     public void GenerateMap()
     {
         float [,] noiseMap = ComputeUtil.GenerateNoiseMap(MapChunkSize, MapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
@@ -36,6 +44,11 @@ public class MapGenerator : MonoBehaviour
             for (int x = 0; x < MapChunkSize; x++)
             {
                 float height = noiseMap[x, y];
+
+                if (useFallOffMap)
+                    height -= fallOffMap[x, y];
+
+                height = Mathf.Clamp(height, 0, 1);
 
                 colorMap[y * MapChunkSize + x] = terrains.Evaluate(height);
             }

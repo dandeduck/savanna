@@ -5,12 +5,6 @@ public class MapDisplay : MonoBehaviour
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
     public MeshCollider meshCollider;
-    public MapGenerator generator;
-    
-    private void Start()
-    {
-        generator.GenerateMap();
-    }
 
     public void DrawTexture(Texture2D texture)
     {
