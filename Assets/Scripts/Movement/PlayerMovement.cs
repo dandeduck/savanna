@@ -13,7 +13,6 @@ public class PlayerMovement : Navigator
         base.OnStart();
 
         input = GetComponent<InputHandler>();
-
     }
 
     protected override float MaxVelocity()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Moveable : MonoBehaviour
+public abstract class Moveable : Lockable
 {
     [SerializeField] private float acceleration;
 
@@ -10,24 +10,19 @@ public abstract class Moveable : MonoBehaviour
     private Vector3 prevDirection;
 
     private bool isStopping;
-    private bool isLocked;
     
-    private void Start()
+    protected override void OnStart()
     {
         controller = GetComponent<CharacterController>();
 
         currentSpeed = 0;
         prevDirection = transform.position;   
         isStopping = false;
-        isLocked = false;
-
-        OnStart();
     }
 
-    private void Update()
+    protected override void OnUnlockedUpdate()
     {
-        if (!isLocked)
-            Move();
+        Move();
     }
 
     public float Acceleration()
@@ -45,15 +40,10 @@ public abstract class Moveable : MonoBehaviour
         return isStopping;
     }
 
-    public void Lock()
+    public override void Lock()
     {
-        isLocked = true;
+        base.Lock();
         currentSpeed = 0;
-    }
-
-    public void UnLock()
-    {
-        isLocked = false;
     }
 
     private void Move()
@@ -84,5 +74,4 @@ public abstract class Moveable : MonoBehaviour
 
     public abstract Vector3 Direction();
     protected abstract float MaxVelocity();
-    protected virtual void OnStart() {}
 }

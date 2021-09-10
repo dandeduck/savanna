@@ -6,14 +6,15 @@ public abstract class Navigator : Moveable
 {
     private NavMeshAgent agent;
     private IEnumerator currentRoutine;
-    private PlayerAiming aiming;
-    private Gravity gravity;
+    private Lockable aiming;
+    private Lockable gravity;
 
     protected override void OnStart()
     {
+        base.OnStart();
+
         agent = GetComponent<NavMeshAgent>();
         aiming = GetComponent<PlayerAiming>();
-        gravity = GetComponent<Gravity>();
     }
 
     public void Navigate(Transform transform)
@@ -42,7 +43,6 @@ public abstract class Navigator : Moveable
     {
         Lock();
         aiming.Lock();
-        gravity.Lock();
         agent.isStopped = false;
         agent.SetDestination(destination);
 
@@ -53,7 +53,6 @@ public abstract class Navigator : Moveable
 
         UnLock();
         aiming.UnLock();
-        gravity.UnLock();
         agent.isStopped = true;
     }
 

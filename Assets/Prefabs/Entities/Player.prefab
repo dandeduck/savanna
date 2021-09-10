@@ -54,14 +54,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5877653098079884585}
   - component: {fileID: 5877653098079884586}
+  - component: {fileID: 3179872119257916101}
   - component: {fileID: 5877653098079884584}
   - component: {fileID: 5877653098079884591}
   - component: {fileID: 5877653098079884590}
-  - component: {fileID: 5877653098079884588}
   - component: {fileID: 5877653098079884578}
+  - component: {fileID: 1177127350833426711}
   - component: {fileID: 3661016226069642639}
   - component: {fileID: 7614351719484173283}
-  - component: {fileID: 1177127350833426711}
   - component: {fileID: 3153332758830519599}
   m_Layer: 0
   m_Name: Player
@@ -104,6 +104,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &3179872119257916101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877653098079884587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e548d60fc8f5cd47bf7d032677cf6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5877653098079884584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,18 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
---- !u!114 &5877653098079884588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5877653098079884587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5dbb6a4e62fe147a12a8e8b929b4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5877653098079884578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +169,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3fd550b0114a5147995404ae5b0fcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1177127350833426711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877653098079884587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7630bb51633df05448ec57b4a16efa1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowbar: {fileID: 0}
 --- !u!114 &3661016226069642639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,19 +208,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: -0.0000016112751, z: 0}
---- !u!114 &1177127350833426711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5877653098079884587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7630bb51633df05448ec57b4a16efa1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowbar: {fileID: 0}
 --- !u!195 &3153332758830519599
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.85
+  m_BaseOffset: 0.7
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &5877653098579837319

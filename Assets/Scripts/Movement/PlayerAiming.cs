@@ -1,38 +1,23 @@
 using UnityEngine;
 
-public class PlayerAiming : MonoBehaviour
+public class PlayerAiming : Lockable
 {
     [SerializeField] private float rotationSpeed;
     
     private Moveable player;
     private Vector3 lastDirection;
-    private bool isLocked;
 
-    private void Start()
+    protected override void OnStart()
     {
         player = GetComponent<Moveable>();
         lastDirection = Vector3.zero;
-        isLocked = false;
     }
 
-    private void Update()
+    protected override void OnUnlockedUpdate()
     {
-        if (!isLocked)
-        {
-            Vector3 direction = player.Direction();
+        Vector3 direction = player.Direction();
 
-            Rotate(direction);
-        }
-    }
-
-    public void Lock()
-    {
-        isLocked = true;
-    }
-
-    public void UnLock()
-    {
-        isLocked = false;
+        Rotate(direction);
     }
 
     private void Rotate(Vector3 direction)
