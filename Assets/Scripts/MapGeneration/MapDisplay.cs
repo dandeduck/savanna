@@ -4,11 +4,12 @@ public class MapDisplay : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
+    public MeshCollider meshCollider;
+    public MapGenerator generator;
     
     private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshFilter = GetComponent<MeshFilter>();
+        generator.GenerateMap();
     }
 
     public void DrawTexture(Texture2D texture)
@@ -22,14 +23,10 @@ public class MapDisplay : MonoBehaviour
 
     public void DrawMesh(MeshData meshData, Texture2D texture)
     {
-        if (meshRenderer == null)
-            meshRenderer = GetComponent<MeshRenderer>();
-        if (meshFilter == null)
-            meshFilter = GetComponent<MeshFilter>();
-
         Mesh mesh = meshData.CreateMesh();
 
         meshFilter.sharedMesh = mesh;
         meshRenderer.sharedMaterial.mainTexture = texture;
+        meshCollider.sharedMesh = mesh;
     }
 }

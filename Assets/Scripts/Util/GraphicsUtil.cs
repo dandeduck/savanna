@@ -5,16 +5,22 @@ public static class GraphicsUtil
     public static void RemoveSharedVertices(Mesh mesh)
     {
         Vector3[] oldVertices = mesh.vertices;
-        int[] triangles = mesh.triangles;
-        Vector3[] vertices = new Vector3[triangles.Length];
+        Vector2[] oldUv = mesh.uv;
+        int[] oldTriangles = mesh.triangles;
+        
+        int[] triangles = new int[oldTriangles.Length];
+        Vector3[] vertices = new Vector3[oldTriangles.Length];
+        Vector2[] uv = new Vector2[oldTriangles.Length];
 
-        for (int i = 0; i < triangles.Length; i++) {
-            vertices[i] = oldVertices[triangles[i]];
+        for (int i = 0; i < oldTriangles.Length; i++) {
+            vertices[i] = oldVertices[oldTriangles[i]];
+            uv[i] = oldUv[oldTriangles[i]];
             triangles[i] = i;
         }
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uv;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
     }
@@ -50,45 +56,46 @@ public static class GraphicsUtil
         return TextureFromColorMap(colorMap, width, height);
     }
 
-    public static MeshData GenerateTerrainMesh(float[,] heightMap)
+    public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve heightCurve, int levelOfDetail)
     {
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
-        //do other things
+        int simplificationIncrement = levelOfDetail == 0 ? 1 : levelOfDetail * 2;
 
-        MeshData meshData = GenerateMeshData(heightMap, width, height);
+        MeshData meshData = GenerateMeshData(heightMap, width, height, heightMultiplier, heightCurve, simplificationIncrement);
 
         return meshData;
     }
 
-    private static MeshData GenerateMeshData(float[,] heightMap, int width, int height)
+    private static MeshData GenerateMeshData(float[,] heightMap, int width, int height, float heightMultiplier, AnimationCurve heightCurve, int simplificationIncrement)
     {
         float topLeftX = (width - 1) / -2f;
         float topLeftZ = (height - 1) / 2f;
+        int verticesPerLine = (width-1) / simplificationIncrement + 1;
 
-        MeshData meshData = new MeshData(width, height);
+        MeshData meshData = new MeshData(verticesPerLine, verticesPerLine);
         int vertexIndex = 0;
 
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < height; y+=simplificationIncrement)
         {
-            for (int x = 0; x < width; x++ , vertexIndex ++)
+            for (int x = 0; x < width; x+=simplificationIncrement , vertexIndex ++)
             {
-                meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightMap[x, y] * 10, topLeftZ - y);
+                meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier, topLeftZ - y);
                 meshData.uvs[vertexIndex] = new Vector2(x/(float)width, y/(float)height);
 
-                AddTriangles(meshData, vertexIndex, x, y, width, height);
+                AddTriangles(meshData, vertexIndex, x, y, width, height, verticesPerLine);
             }
         }
 
         return meshData;
     }
 
-    private static void AddTriangles(MeshData meshData, int vertexIndex, int x, int y, int width, int height)
+    private static void AddTriangles(MeshData meshData, int vertexIndex, int x, int y, int width,  int height, int verticesPerLine)
     {
         if (x < width - 1 && y < height - 1)
         {
-            meshData.AddTriangle(vertexIndex, vertexIndex + width + 1, vertexIndex + width);
-            meshData.AddTriangle(vertexIndex + width + 1, vertexIndex, vertexIndex + 1);
+            meshData.AddTriangle(vertexIndex, vertexIndex + verticesPerLine + 1, vertexIndex + verticesPerLine);
+            meshData.AddTriangle(vertexIndex + verticesPerLine + 1, vertexIndex, vertexIndex + 1);
         }
     }
 }
