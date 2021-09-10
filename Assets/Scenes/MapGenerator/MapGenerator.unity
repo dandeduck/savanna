@@ -474,7 +474,12 @@ MonoBehaviour:
   autoUpdate: 1
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 0.3
+  seed: 7
+  noiseScale: 20.26
+  octaves: 4
+  persistance: 0.5
+  lacunarity: 2
+  offset: {x: 0, y: 0}
   display: {fileID: 693268285}
 --- !u!4 &1530030223
 Transform:
