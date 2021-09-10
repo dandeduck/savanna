@@ -43,7 +43,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.03203987, g: 0.03203987, b: 0.4528302, a: 1}
+  m_Color: {r: 0.015686275, g: 0.015686275, b: 0.2627451, a: 1}
   m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
@@ -106,4 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48354c9ad69b2074ab22cfc9cd888c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sun: {fileID: 0}
+  halfCycleLengthMinutes: 0
