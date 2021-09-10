@@ -39,23 +39,37 @@ public abstract class Navigator : Moveable
         StartCoroutine(currentRoutine);
     }
 
+    public bool HasReachedDestination()
+    {
+        return agent.remainingDistance > agent.stoppingDistance;
+    }
+
     private IEnumerator Navigation(Vector3 destination)
+    {
+        EnableNavigation(destination);
+
+        do
+        {
+            yield return null;
+        } while (HasReachedDestination());
+
+        DisableNavigation();
+    }
+
+    private void EnableNavigation(Vector3 destination)
     {
         Lock();
         aiming.Lock();
         agent.isStopped = false;
         agent.SetDestination(destination);
+    }
 
-        do
-        {
-            yield return null;
-        } while (agent.remainingDistance > agent.stoppingDistance);
-
+    private void DisableNavigation()
+    {
         UnLock();
         aiming.UnLock();
         agent.isStopped = true;
     }
-
 
     private bool IsNavigating()
     {
