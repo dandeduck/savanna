@@ -1,50 +1,38 @@
 using UnityEngine;
 
-public abstract class Moveable : MonoBehaviour
+public abstract class Moveable : Lockable
 {
     [SerializeField] private float acceleration;
-    [SerializeField] private float deceleration;
 
     private CharacterController controller;
     private float currentSpeed;
     private Vector3 currentDirection;
     private Vector3 prevDirection;
+
     private bool isStopping;
     
-    private void Start()
+    protected override void OnStart()
     {
         controller = GetComponent<CharacterController>();
 
         currentSpeed = 0;
         prevDirection = transform.position;   
         isStopping = false;
-
-        OnStart();
     }
 
-    private void Update()
+    protected override void OnUnlockedUpdate()
     {
-        currentDirection = Direction();
-
-        if (currentDirection.magnitude >= 0.1f)
-        {
-            isStopping = false;
-            prevDirection = currentDirection;
-            currentSpeed = Mathf.Min(MaxSpeed(), currentSpeed+acceleration);
-            controller.Move(currentDirection * currentSpeed * Time.deltaTime);
-        }
-        
-        else
-        {
-            isStopping = true;
-            currentSpeed = Mathf.Max(0, currentSpeed-deceleration);
-            controller.Move(prevDirection * currentSpeed * Time.deltaTime);
-        }
+        Move();
     }
 
-    public Vector3 Velocity()
+    public float Acceleration()
     {
-        return currentDirection * currentSpeed;
+        return acceleration;
+    }
+
+    public virtual Vector3 Velocity()
+    {
+        return controller.velocity;
     }
 
     public bool IsStopping()
@@ -52,7 +40,38 @@ public abstract class Moveable : MonoBehaviour
         return isStopping;
     }
 
+    public override void Lock()
+    {
+        base.Lock();
+        currentSpeed = 0;
+    }
+
+    private void Move()
+    {
+        currentDirection = Direction();
+
+        if (currentDirection.magnitude >= 0.1f)
+            MoveForward();
+        
+        else
+            MoveBackwards();
+    }
+
+    private void MoveForward()
+    {
+        isStopping = false;
+        prevDirection = currentDirection;
+        currentSpeed = Mathf.Min(MaxVelocity(), currentSpeed + acceleration * Time.deltaTime);
+        controller.Move(currentDirection * currentSpeed * Time.deltaTime);
+    }
+
+    private void MoveBackwards()
+    {
+        isStopping = true;
+        currentSpeed = Mathf.Max(0, currentSpeed - acceleration * 2 * Time.deltaTime);
+        controller.Move(prevDirection * currentSpeed * Time.deltaTime);
+    }
+
     public abstract Vector3 Direction();
-    protected abstract float MaxSpeed();
-    protected virtual void OnStart() {}
+    protected abstract float MaxVelocity();
 }

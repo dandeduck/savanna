@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInSpeed: 20
-  fadeOutSpeed: 1000
   opacity: 0.1
 --- !u!1 &4356218712243943059
 GameObject:
