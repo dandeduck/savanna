@@ -28,8 +28,6 @@ public abstract class Moveable : MonoBehaviour
     {
         if (!isLocked)
             Move();
-        else
-            currentDirection = Vector3.zero;
     }
 
     public float Acceleration()

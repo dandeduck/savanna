@@ -48,9 +48,9 @@ public abstract class Navigator : Moveable
             yield return null;
         } while (agent.remainingDistance > agent.stoppingDistance);
 
-        agent.isStopped = true;
-        UnLock();
+        // UnLock();
         aiming.UnLock();
+        agent.isStopped = true;
     }
 
 
