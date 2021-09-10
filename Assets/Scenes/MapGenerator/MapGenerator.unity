@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a46b0878f1e3d4d99d90a2e9b8837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoUpdate: 1
+  autoUpdate: 0
   mapWidth: 100
   mapHeight: 100
   seed: 7
@@ -481,6 +481,35 @@ MonoBehaviour:
   lacunarity: 2
   offset: {x: 0, y: 0}
   display: {fileID: 693268285}
+  terrains:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.5595119, b: 1, a: 1}
+    key1: {r: 0.6043908, g: 0.2702316, b: 0.057861328, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 0.38039216}
+    key3: {r: 1, g: 1, b: 1, a: 0.38039216}
+    key4: {r: 0.06666667, g: 0.69803923, b: 0.09803922, a: 0.38039216}
+    key5: {r: 0.06666667, g: 0.69803923, b: 0.09803922, a: 0.38039216}
+    key6: {r: 0.06666667, g: 0.69803923, b: 0.09803922, a: 0.38039216}
+    key7: {r: 0.06666667, g: 0.69803923, b: 0.09803922, a: 0.38039216}
+    ctime0: 13107
+    ctime1: 19661
+    ctime2: 39899
+    ctime3: 39899
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
 --- !u!4 &1530030223
 Transform:
   m_ObjectHideFlags: 0
