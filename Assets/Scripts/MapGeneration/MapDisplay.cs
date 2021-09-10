@@ -2,20 +2,34 @@ using UnityEngine;
 
 public class MapDisplay : MonoBehaviour
 {
-    private Renderer textureRenderer;
+    public MeshRenderer meshRenderer;
+    public MeshFilter meshFilter;
     
     private void Start()
     {
-        textureRenderer = GetComponent<Renderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshFilter = GetComponent<MeshFilter>();
     }
 
     public void DrawTexture(Texture2D texture)
     {
-         if (textureRenderer == null)
-            textureRenderer = GetComponent<Renderer>();
+        if (meshRenderer == null)
+            meshRenderer = GetComponent<MeshRenderer>();
 
-        textureRenderer.sharedMaterial.mainTexture = texture;
-        textureRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
+        meshRenderer.sharedMaterial.mainTexture = texture;
+        meshRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
     }
 
+    public void DrawMesh(MeshData meshData, Texture2D texture)
+    {
+        if (meshRenderer == null)
+            meshRenderer = GetComponent<MeshRenderer>();
+        if (meshFilter == null)
+            meshFilter = GetComponent<MeshFilter>();
+
+        Mesh mesh = meshData.CreateMesh();
+
+        meshFilter.sharedMesh = mesh;
+        meshRenderer.sharedMaterial.mainTexture = texture;
+    }
 }
