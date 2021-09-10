@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GraphicsUtil
+public static class GraphicsUtil
 {
     public static void RemoveSharedVertices(Mesh mesh)
     {
