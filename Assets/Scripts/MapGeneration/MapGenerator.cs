@@ -4,7 +4,7 @@ public class MapGenerator : MonoBehaviour
 {
     private const int MapChunkSize = 255;
 
-    public enum DrawMode {NoiseMap, ColorMap, Mesh};
+    public enum DrawMode {Mesh};
     public DrawMode drawMode;
 
     public bool autoUpdate;
@@ -53,13 +53,8 @@ public class MapGenerator : MonoBehaviour
                 colorMap[y * MapChunkSize + x] = terrains.Evaluate(height);
             }
         }
-
-        if (drawMode == DrawMode.NoiseMap)
-            display.DrawTexture(GraphicsUtil.TextureFromHeightMap(noiseMap));
-        else if (drawMode == DrawMode.ColorMap)
-            display.DrawTexture(GraphicsUtil.TextureFromColorMap(colorMap, MapChunkSize, MapChunkSize));
-        else if (drawMode == DrawMode.Mesh)
-            display.DrawMesh(GraphicsUtil.GenerateTerrainMesh(noiseMap, heightMultiplier, heightCurve, levelOfDetail), GraphicsUtil.TextureFromColorMap(colorMap, MapChunkSize, MapChunkSize));
+        
+        display.DrawMesh(GraphicsUtil.GenerateTerrainMesh(noiseMap, heightMultiplier, heightCurve, levelOfDetail), GraphicsUtil.TextureFromColorMap(colorMap, MapChunkSize, MapChunkSize), terrains);
     }
 
     private void OnValidate()
