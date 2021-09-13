@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor (typeof (MapGenerator))]
+[CustomEditor (typeof (TestMapGenerator))]
 public class MapGeneratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        MapGenerator generator = (MapGenerator) target;
+        TestMapGenerator generator = (TestMapGenerator) target;
 
         if (DrawDefaultInspector())
         {
