@@ -56,7 +56,7 @@ public static class GraphicsUtil
         return TextureFromColorMap(colorMap, width, height);
     }
 
-    public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve heightCurve, int levelOfDetail)
+    public static Mesh GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve heightCurve, int levelOfDetail)
     {
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
@@ -64,7 +64,7 @@ public static class GraphicsUtil
 
         MeshData meshData = GenerateMeshData(heightMap, width, height, heightMultiplier, heightCurve, simplificationIncrement);
 
-        return meshData;
+        return meshData.CreateMesh();
     }
 
     private static MeshData GenerateMeshData(float[,] heightMap, int width, int height, float heightMultiplier, AnimationCurve heightCurve, int simplificationIncrement)

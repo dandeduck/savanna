@@ -24,8 +24,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float heightMultiplier;
     [SerializeField] private AnimationCurve heightCurve;
 
-    [SerializeField] private MapDisplay display;
-    [SerializeField] private Gradient terrains;
+    [SerializeField] private Biome biome;
 
     private float[,] fallOffMap = ComputeUtil.GenerateFalloffMap(MapChunkSize);
 
@@ -37,24 +36,9 @@ public class MapGenerator : MonoBehaviour
     public void GenerateMap()
     {
         float [,] noiseMap = ComputeUtil.GenerateNoiseMap(MapChunkSize, MapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
-        Color[] colorMap = new Color[MapChunkSize * MapChunkSize];
-
-        for (int y = 0; y < MapChunkSize; y++)
-        {
-            for (int x = 0; x < MapChunkSize; x++)
-            {
-                float height = noiseMap[x, y];
-
-                if (useFallOffMap)
-                    height -= fallOffMap[x, y];
-
-                height = Mathf.Clamp(height, 0, 1);
-
-                colorMap[y * MapChunkSize + x] = terrains.Evaluate(height);
-            }
-        }
+        Mesh terrainMesh = GraphicsUtil.GenerateTerrainMesh(noiseMap, heightMultiplier, heightCurve, levelOfDetail);
         
-        display.DrawMesh(GraphicsUtil.GenerateTerrainMesh(noiseMap, heightMultiplier, heightCurve, levelOfDetail), GraphicsUtil.TextureFromColorMap(colorMap, MapChunkSize, MapChunkSize), terrains);
+        biome.SetMesh(terrainMesh, heightMultiplier);
     }
 
     private void OnValidate()
