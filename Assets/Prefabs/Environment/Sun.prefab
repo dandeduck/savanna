@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ff6cb650d83e64c816a0da0d03f33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayLengthMinutes: 15
+  halfCycleLengthMinutes: 0
   dayColor: {r: 1, g: 1, b: 1, a: 1}
   transitionColor: {r: 0.901, g: 0.454, b: 0.317, a: 1}
-  nightColor: {r: 0.25, g: 0.25, b: 0.6, a: 1}
+  nightColor: {r: 0.015686275, g: 0.015686275, b: 0.2627451, a: 1}
