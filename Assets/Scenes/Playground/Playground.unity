@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.25
+  m_AmbientIntensity: 0.42
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -1180,11 +1180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.b
-      value: 1
+      value: 0.6745283
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.g
-      value: 1
+      value: 0.98400193
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.r
@@ -1302,6 +1302,22 @@ PrefabInstance:
     - target: {fileID: 6523270132609080780, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_Name
       value: Moon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
+      propertyPath: m_Color.b
+      value: 0.47058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080782, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_RootOrder
