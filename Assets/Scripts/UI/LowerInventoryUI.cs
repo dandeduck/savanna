@@ -1,9 +1,10 @@
 using UnityEngine;
 using TMPro;
 
-public class LowerInventory : MonoBehaviour
+public class LowerInventoryUI : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
+    [SerializeField] private InputHandler input;
     
     private TMP_Text text;
 
@@ -21,7 +22,7 @@ public class LowerInventory : MonoBehaviour
         
         text.text = $"{amountOfBalls} Balls";
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (input.Dropping())
             inventory.Drop("Ball", 1);
     }
 }

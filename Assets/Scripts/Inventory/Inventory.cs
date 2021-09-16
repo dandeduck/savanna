@@ -5,19 +5,27 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int size;
 
-    private Dictionary<string, Pickupable> items;
+    private Dictionary<string, Item> items;
     
     private void Start()
     {
-        items = new Dictionary<string, Pickupable>();
+        items = new Dictionary<string, Item>();
     }
 
-    public Dictionary<string, Pickupable> Items()
+    public Dictionary<string, Item> Items()
     {
         return items;
     }
 
-    public bool Pickup(Pickupable pickedUp)
+    public Item[] ItemsArr()
+    {
+        Item[] itemsArr = new Item[items.Count];
+        items.Values.CopyTo(itemsArr, 0);
+
+        return itemsArr;
+    }
+
+    public bool Pickup(Item pickedUp)
     {
         if (items.Count == size)
             return false;
@@ -36,7 +44,7 @@ public class Inventory : MonoBehaviour
     {
         if (items.ContainsKey(type))
         {
-            Pickupable item = items[type];
+            Item item = items[type];
             item.Drop(amountDropped, transform.position);
 
             if (item.Amount() == 0)
@@ -48,7 +56,7 @@ public class Inventory : MonoBehaviour
     {
         if (items.ContainsKey(type))
         {
-            Pickupable item = items[type];
+            Item item = items[type];
 
             if (amount > item.Amount())
                 return false;
@@ -62,5 +70,22 @@ public class Inventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    public Item SelectedItem()
+    {
+        Item[] arr = ItemsArr();
+
+        if (arr.Length > 0)
+            return arr[0];
+        
+        return null;
+    }
+
+    public void RemoveSelfDroppedItem(string type)
+    {
+        if (items.ContainsKey(type))
+            if (items[type] == null)
+                items.Remove(type);
     }
 }

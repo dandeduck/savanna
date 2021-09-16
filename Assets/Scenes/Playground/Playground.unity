@@ -256,9 +256,17 @@ PrefabInstance:
       propertyPath: lowbar
       value: 
       objectReference: {fileID: 1655516952}
+    - target: {fileID: 1177127350833426711, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: useBar
+      value: 
+      objectReference: {fileID: 1655516952}
     - target: {fileID: 3153332758830519599, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: m_BaseOffset
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323364229550141719, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.865
       objectReference: {fileID: 0}
     - target: {fileID: 5877653098079884585, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: m_RootOrder
@@ -308,6 +316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8953340274655023083, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: useBar
+      value: 
+      objectReference: {fileID: 1655516952}
     m_RemovedComponents:
     - {fileID: 5877653098079884588, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
     - {fileID: 5877653098079884578, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
@@ -1077,6 +1089,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1495696125837522996, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 1566917000}
     - target: {fileID: 1495696125837522996, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: inventory
       value: 

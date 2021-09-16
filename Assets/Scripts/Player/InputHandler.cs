@@ -56,6 +56,11 @@ public class InputHandler : MonoBehaviour
         return Input.GetMouseButtonDown(1);
     }
 
+    public bool Dropping()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
     public bool Sprinting()
     {
         return Input.GetKey(KeyCode.LeftShift);
@@ -74,5 +79,10 @@ public class InputHandler : MonoBehaviour
     public bool ZoomingOut()
     {
         return Input.GetAxisRaw("Mouse ScrollWheel") < 0;
+    }
+
+    public bool UsingItem()
+    {
+        return Input.GetKeyDown(KeyCode.E);
     }
 }

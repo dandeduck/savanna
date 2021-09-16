@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 public class PlayerPickupper : MonoBehaviour
 {
-    PlayerInventoryManager inventories;
+    PlayerInventory inventory;
     InputHandler input;
     Navigator navigator;
 
-    private List<Pickupable> pickupables;
-    private Pickupable selected;
+    private List<Item> items;
+    private Item selected;
 
     private void Start()
     {
-        inventories = GetComponent<PlayerInventoryManager>();
+        inventory = GetComponent<PlayerInventory>();
         input = GetComponent<InputHandler>();
         navigator = GetComponent<Navigator>();
 
-        pickupables = new List<Pickupable>();
+        items = new List<Item>();
     }
 
     private void Update()
@@ -30,25 +30,25 @@ public class PlayerPickupper : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Pickupable pickupable = collider.GetComponent<Pickupable>();
+        Item item = collider.GetComponent<Item>();
 
-        if (pickupable != null)
-            pickupables.Add(pickupable);
+        if (item != null)
+            items.Add(item);
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        Pickupable pickupable = collider.GetComponent<Pickupable>();
+        Item item = collider.GetComponent<Item>();
 
-        if (pickupable != null)
-            pickupables.Remove(pickupable);
+        if (item != null)
+            items.Remove(item);
     }
 
-    private Pickupable GetSelected()
+    private Item GetSelected()
     {
         if (input.HasAim())
         {
-            Pickupable aimSelected =  GetAimSelected();
+            Item aimSelected =  GetAimSelected();
 
             if (aimSelected != null)
                 navigator.Navigate(aimSelected.transform);
@@ -57,19 +57,19 @@ public class PlayerPickupper : MonoBehaviour
         }
 
         else
-            return pickupables[0];
+            return items[0];
     }
 
-    private Pickupable GetAimSelected()
+    private Item GetAimSelected()
     {
         RaycastHit[] hits = input.AimRaycastAll();
 
         for (int i = 0; i < hits.Length; i++)
         {
-            Pickupable pickupable = hits[i].transform.GetComponent<Pickupable>();
+            Item item = hits[i].transform.GetComponent<Item>();
 
-            if (pickupable != null)
-                return pickupable;
+            if (item != null)
+                return item;
         }
 
         return null;
@@ -77,10 +77,10 @@ public class PlayerPickupper : MonoBehaviour
 
     private void Pickup()
     {
-        if (pickupables.Contains(selected))
+        if (items.Contains(selected))
         {
-            inventories.Pickup(selected);
-            pickupables.Remove(selected);
+            inventory.Pickup(selected);
+            items.Remove(selected);
 
             selected = null;
         }

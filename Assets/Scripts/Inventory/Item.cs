@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Pickupable : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     [SerializeField] private string type;
     [SerializeField] private int initialAmount = 0;
@@ -24,25 +24,27 @@ public abstract class Pickupable : MonoBehaviour
         return type;
     }
 
-    public Pickupable Pickup()
+    public Item Pickup()
     {
         OnPickup();
 
         return this;
     }
 
-    public void Drop(int amountDropped, Vector3 dropPosition)
+    public Item Drop(int amountDropped, Vector3 dropPosition)
     {
         amountDropped = Mathf.Min(amountDropped, amount);
         amount -= amountDropped;
 
-        Pickupable pickupable = Instantiate<Pickupable>(this, dropPosition, Quaternion.Euler(0,0,0));
-        pickupable.SetAmount(amountDropped);
+        Item item = Instantiate<Item>(this, dropPosition, Quaternion.Euler(0,0,0));
+        item.SetAmount(amountDropped);
 
-        OnDrop(pickupable);
+        OnDrop(item);
 
         if (amount <= 0)
             Destroy(this.gameObject, Time.deltaTime);
+
+        return item;
     }
 
     public void SetAmount(int amount)
@@ -58,14 +60,15 @@ public abstract class Pickupable : MonoBehaviour
             Destroy(this.gameObject, Time.deltaTime);
     }
 
-    public void Merge(Pickupable pickupable)
+    public void Merge(Item item)
     {
-        amount += pickupable.Amount();
+        amount += item.Amount();
 
-        Destroy(pickupable.gameObject, Time.deltaTime);
+        Destroy(item.gameObject, Time.deltaTime);
     }
 
+    public abstract void Use(Vector3 position, Quaternion rotation);
     protected virtual void OnStart() {}
     protected abstract void OnPickup();
-    protected abstract void OnDrop(Pickupable droppedItem);
+    protected abstract void OnDrop(Item droppedItem);
 }

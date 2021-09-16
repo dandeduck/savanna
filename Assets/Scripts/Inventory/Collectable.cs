@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Collectable : Pickupable
+public abstract class Collectable : Item
 {
     private MeshRenderer meshRenderer;
     private Collider objectCollider;
@@ -17,7 +17,7 @@ public class Collectable : Pickupable
         objectCollider.enabled = false;
     }
 
-    protected override void OnDrop(Pickupable droppedItem)
+    protected override void OnDrop(Item droppedItem)
     {
         MeshRenderer newRenderer = droppedItem.GetComponent<MeshRenderer>();
         Collider newCollider = droppedItem.GetComponent<Collider>();
