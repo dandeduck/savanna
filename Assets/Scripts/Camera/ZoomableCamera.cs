@@ -26,8 +26,7 @@ public class ZoomableCamera : MonoBehaviour
 
         if (isZooming)
         {
-            Vector3 targetPosition = new Vector3(transform.position.x, followingCamera.TargetPosition().y, transform.position.z);
-
+            Vector3 targetPosition = new Vector3(transform.position.x, followingCamera.TargetPositionWithoutOffset().y + offset.Get().y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * zoomDamping);
 
             if ((transform.position - targetPosition).magnitude <= 0.5f)
@@ -45,15 +44,21 @@ public class ZoomableCamera : MonoBehaviour
 
     private void ZoomIn()
     {
+        Debug.Log("Zooming In");
+        Debug.Log(offset.Get());
         if (offset.Hypotenuse() - zoomSpeed >= minDistance)
             offset.MoveCloser(zoomSpeed);
         isZooming = true;
+        Debug.Log(offset.Get());
     }
 
     private void ZoomOut()
     {
+        Debug.Log("Zooming Out");
+        Debug.Log(offset.Get());
         if (offset.Hypotenuse() + zoomSpeed <= maxDistance)
             offset.MoveFurther(zoomSpeed);
         isZooming = true;
+        Debug.Log(offset.Get());
     }
 }

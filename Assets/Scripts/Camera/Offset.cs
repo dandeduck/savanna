@@ -35,22 +35,23 @@ public class Offset : MonoBehaviour
 
     public void MoveCloser(float dist)
     {
+        Debug.Log("Moving closer");
         ChangeHypotenuse(-dist);
     }
 
     public void ChangeHypotenuse(float change)
     {
-        offset = new Vector3(offset.x, CalcZoomedY(change), CalcZoomedZ(change));
+        offset = new Vector3(offset.x, CalcFurtherY(change), CalcFurtherZ(change));
         hypotenuse += change;
     }
     
-    private float CalcZoomedY(float zoomAmount)
+    private float CalcFurtherY(float zoomAmount)
     {
-        return Mathf.Sin(angle) * (hypotenuse - zoomAmount);
+        return Mathf.Sin(angle) * (hypotenuse + zoomAmount);
     }
 
-    private float CalcZoomedZ(float zoomAmount)
+    private float CalcFurtherZ(float zoomAmount)
     {
-        return -Mathf.Cos(angle) * (hypotenuse - zoomAmount);
+        return -Mathf.Cos(angle) * (hypotenuse + zoomAmount);
     }
 }
