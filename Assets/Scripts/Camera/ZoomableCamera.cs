@@ -26,7 +26,7 @@ public class ZoomableCamera : MonoBehaviour
 
         if (isZooming)
         {
-            Vector3 targetPosition = new Vector3(transform.position.x, followingCamera.TargetPositionWithoutOffset().y, transform.position.z);
+            Vector3 targetPosition = new Vector3(transform.position.x, followingCamera.TargetPositionWithoutOffset().y + offset.Get().y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * zoomDamping);
 
             if ((transform.position - targetPosition).magnitude <= 0.5f)

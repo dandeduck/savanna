@@ -23,9 +23,9 @@ public class FollowingCamera : MonoBehaviour
         if (offset.Hypotenuse() <= 5)
             hypotenuseMultiplier = 0.75f;
 
-        targetPosition = target.transform.position + offset.Get() + SmoothedVelocity() * aheadSpeed * hypotenuseMultiplier;
+        targetPosition = target.transform.position + SmoothedVelocity() * aheadSpeed * hypotenuseMultiplier;
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followDamping * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition + offset.Get(), followDamping * Time.deltaTime);
     }
 
     private Vector3 SmoothedVelocity()
