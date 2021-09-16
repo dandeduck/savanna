@@ -7,9 +7,9 @@ public class FollowingCamera : MonoBehaviour
 
     [SerializeField] private float aheadSpeed;
     [SerializeField] private float followDamping;
-    [SerializeField] private float zoomDamping;
 
     private Offset offset;
+    private Vector3 targetPosition;
 
     private void Awake()
     {
@@ -23,10 +23,9 @@ public class FollowingCamera : MonoBehaviour
         if (offset.Hypotenuse() <= 5)
             hypotenuseMultiplier = 0.75f;
 
-        Vector3 targetPosition = target.transform.position + offset.Get() + SmoothedVelocity() * aheadSpeed * hypotenuseMultiplier;
-        Vector3 newPosition = Vector3.Lerp(transform.position, targetPosition, followDamping * Time.deltaTime);
+        targetPosition = target.transform.position + offset.Get() + SmoothedVelocity() * aheadSpeed * hypotenuseMultiplier;
 
-        transform.position = new Vector3(newPosition.x, Mathf.Lerp(transform.position.y, targetPosition.y, zoomDamping * Time.deltaTime), newPosition.z);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, followDamping * Time.deltaTime);
     }
 
     private Vector3 SmoothedVelocity()
@@ -35,5 +34,10 @@ public class FollowingCamera : MonoBehaviour
             return Vector3.zero;
         else
             return target.Velocity();
+    }
+
+    public Vector3 TargetPosition()
+    {
+        return targetPosition;
     }
 }
