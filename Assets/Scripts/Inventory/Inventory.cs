@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour
     public void RemoveSelfDroppedItem(string type)
     {
         if (items.ContainsKey(type))
-            if (items[type] == null)
+            if (items[type].Amount() <= 0)
                 items.Remove(type);
     }
 }
