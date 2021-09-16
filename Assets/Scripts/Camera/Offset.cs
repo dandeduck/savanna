@@ -35,7 +35,6 @@ public class Offset : MonoBehaviour
 
     public void MoveCloser(float dist)
     {
-        Debug.Log("Moving closer");
         ChangeHypotenuse(-dist);
     }
 
