@@ -2,20 +2,25 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] Inventory lowbar;
+    [SerializeField] Inventory useBar;
 
     public bool Pickup(Item item)
     {
-        return lowbar.Pickup(item);
+        return useBar.Pickup(item);
     }
 
     public Item SelectedItem()
     {
-        return lowbar.SelectedItem();
+        return useBar.SelectedItem();
     }
 
     public Vector3 UsePosition()
     {
-        return lowbar.transform.position;
+        return useBar.transform.position;
+    }
+
+    public void RemoveUsedItem(string type)
+    {
+        useBar.RemoveSelfDroppedItem(type);
     }
 }

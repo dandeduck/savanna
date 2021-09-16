@@ -67,7 +67,7 @@ public abstract class Item : MonoBehaviour
         Destroy(item.gameObject, Time.deltaTime);
     }
 
-    public abstract void Use(Vector3 position);
+    public abstract void Use(Vector3 position, Quaternion rotation);
     protected virtual void OnStart() {}
     protected abstract void OnPickup();
     protected abstract void OnDrop(Item droppedItem);

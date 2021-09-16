@@ -74,6 +74,18 @@ public class Inventory : MonoBehaviour
 
     public Item SelectedItem()
     {
-        return ItemsArr()[0];
+        Item[] arr = ItemsArr();
+
+        if (arr.Length > 0)
+            return arr[0];
+        
+        return null;
+    }
+
+    public void RemoveSelfDroppedItem(string type)
+    {
+        if (items.ContainsKey(type))
+            if (items[type] == null)
+                items.Remove(type);
     }
 }

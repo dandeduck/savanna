@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PlayerPickupper : MonoBehaviour
 {
-    PlayerInventory inventories;
+    PlayerInventory inventory;
     InputHandler input;
     Navigator navigator;
 
@@ -12,7 +12,7 @@ public class PlayerPickupper : MonoBehaviour
 
     private void Start()
     {
-        inventories = GetComponent<PlayerInventory>();
+        inventory = GetComponent<PlayerInventory>();
         input = GetComponent<InputHandler>();
         navigator = GetComponent<Navigator>();
 
@@ -79,7 +79,7 @@ public class PlayerPickupper : MonoBehaviour
     {
         if (items.Contains(selected))
         {
-            inventories.Pickup(selected);
+            inventory.Pickup(selected);
             items.Remove(selected);
 
             selected = null;

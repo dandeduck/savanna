@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ThrowableItem : LimitedItem
 {
-    protected override void WhenUsed()
+    protected override void WhenUsed(Vector3 position, Quaternion rotation)
     {
-        Instantiate(gameObject, transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(Vector3.forward, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(rotation * Vector3.forward * 10, ForceMode.Impulse);
     }
 }
