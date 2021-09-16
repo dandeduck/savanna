@@ -3,35 +3,56 @@ using UnityEngine;
 public class ZoomableCamera : MonoBehaviour
 {
     [SerializeField] private InputHandler input;
-    [SerializeField] private float maxSize;
-    [SerializeField] private float minSize;
+    [SerializeField] private float minDistance;
+    [SerializeField] private float maxDistance;
     [SerializeField] private float zoomSpeed;
     [SerializeField] private float zoomDamping;
 
-    private Camera objectCamera;
-    private float targetSize;
+    private FollowingCamera followingCamera;
+    private Offset offset;
 
-    private void Start()
+    private bool isZooming;
+
+    private void Awake()
     {
-        objectCamera = GetComponent<Camera>();
-        objectCamera.orthographicSize = maxSize;
-        targetSize = maxSize;
+        followingCamera = GetComponent<FollowingCamera>();
+        offset = GetComponent<Offset>();
+        isZooming = false;
     }
 
     private void LateUpdate()
     {
         SetZoom();
+
+        if (isZooming)
+        {
+            Vector3 targetPosition = new Vector3(transform.position.x, followingCamera.TargetPositionWithoutOffset().y + offset.Get().y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * zoomDamping);
+
+            if ((transform.position - targetPosition).magnitude <= 0.5f)
+                isZooming = false;
+        }
     }
 
     private void SetZoom()
     {
-        float zoom = objectCamera.orthographicSize;
-
         if (input.ZoomingIn())
-            targetSize = Mathf.Max(minSize, targetSize - zoomSpeed);
+            ZoomIn();
         else if (input.ZoomingOut())
-            targetSize = Mathf.Min(maxSize, targetSize + zoomSpeed);
-            
-        objectCamera.orthographicSize = Mathf.Lerp(zoom, targetSize, zoomDamping * Time.deltaTime);
+            ZoomOut();
+    }
+
+    private void ZoomIn()
+    {
+        if (offset.Hypotenuse() - zoomSpeed >= minDistance)
+            offset.MoveCloser(zoomSpeed);
+        isZooming = true;
+    }
+
+    private void ZoomOut()
+    {
+        if (offset.Hypotenuse() + zoomSpeed <= maxDistance)
+            offset.MoveFurther(zoomSpeed);
+        isZooming = true;
     }
 }
