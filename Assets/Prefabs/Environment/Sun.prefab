@@ -43,7 +43,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halfCycleLengthMinutes: 0
-  dayColor: {r: 1, g: 1, b: 1, a: 1}
+  dayColor: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   transitionColor: {r: 0.901, g: 0.454, b: 0.317, a: 1}
   nightColor: {r: 0.015686275, g: 0.015686275, b: 0.2627451, a: 1}

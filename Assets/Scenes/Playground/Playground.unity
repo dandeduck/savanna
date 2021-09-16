@@ -1213,11 +1213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.b
-      value: 0.6745283
+      value: 0.8392157
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.g
-      value: 0.98400193
+      value: 0.95686275
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: dayColor.r
@@ -1289,11 +1289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.8392157
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.95686275
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795038, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_Color.r
