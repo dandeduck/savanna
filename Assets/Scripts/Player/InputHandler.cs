@@ -75,4 +75,9 @@ public class InputHandler : MonoBehaviour
     {
         return Input.GetAxisRaw("Mouse ScrollWheel") < 0;
     }
+
+    public bool UsingItem()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
 }

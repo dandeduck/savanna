@@ -260,6 +260,10 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 4323364229550141719, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.865
+      objectReference: {fileID: 0}
     - target: {fileID: 5877653098079884585, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: m_RootOrder
       value: 9
