@@ -3,15 +3,15 @@ using UnityEngine;
 public class ZoomableCamera : MonoBehaviour
 {
     [SerializeField] private InputHandler input;
-    [SerializeField] private float maxZoom;
+    [SerializeField] private float minDistance;
+    [SerializeField] private float maxDistance;
     [SerializeField] private float zoomSpeed;
 
-    private FollowingCamera objectCamera;
-    private float zoom;
+    private Offset offset;
 
-    private void Start()
+    private void Awake()
     {
-        objectCamera = GetComponent<FollowingCamera>();
+        offset = GetComponent<Offset>();
     }
 
     private void LateUpdate()
@@ -24,19 +24,13 @@ public class ZoomableCamera : MonoBehaviour
 
     private void ZoomIn()
     {
-        if (zoom + zoomSpeed <= maxZoom)
-        {
-            objectCamera.ZoomIn(zoomSpeed);
-            zoom += zoomSpeed;
-        }
+        if (offset.Hypotenuse() - zoomSpeed >= minDistance)
+            offset.MoveCloser(zoomSpeed);
     }
 
     private void ZoomOut()
     {
-        if (zoom - zoomSpeed >= 0)
-        {
-            objectCamera.ZoomOut(zoomSpeed);
-            zoom -= zoomSpeed;
-        }
+        if (offset.Hypotenuse() + zoomSpeed <= maxDistance)
+            offset.MoveFurther(zoomSpeed);
     }
 }
