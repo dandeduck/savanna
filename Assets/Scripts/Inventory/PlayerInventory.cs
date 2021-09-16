@@ -19,8 +19,8 @@ public class PlayerInventory : MonoBehaviour
         return useBar.transform.position;
     }
 
-    public void RemoveUsedItem(string type)
+    public void RemoveUsedItem(Item item)
     {
-        useBar.RemoveSelfDroppedItem(type);
+        useBar.RemoveSelfDroppedItem(item.Type());
     }
 }

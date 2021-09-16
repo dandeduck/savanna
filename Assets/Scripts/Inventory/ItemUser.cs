@@ -25,21 +25,7 @@ public class ItemUser : MonoBehaviour
         if (selected != null)
         {
             selected.Use(inventory.UsePosition(), transform.rotation);
-
-            StartCoroutine(RemoveUsedAfterDestroyed(selected));
-        }
-    }
-
-    IEnumerator RemoveUsedAfterDestroyed(Item item)
-    {
-        if (item == null || item.Amount() == 0)
-        {
-            while (item != null)
-            {
-                yield return null;
-            }
-
-            inventory.RemoveUsedItem(item.Type());
+            inventory.RemoveUsedItem(selected);
         }
     }
 }
