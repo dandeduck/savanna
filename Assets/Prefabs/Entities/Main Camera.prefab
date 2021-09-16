@@ -160,7 +160,6 @@ GameObject:
   - component: {fileID: 1495696126482489524}
   - component: {fileID: 1495696126482489520}
   - component: {fileID: 1495696126482489527}
-  - component: {fileID: 2506056666102840757}
   - component: {fileID: 1495696126482489515}
   - component: {fileID: 1495696126482489526}
   m_Layer: 0
@@ -245,6 +244,7 @@ MonoBehaviour:
   offset: {x: 0, y: 13, z: -6.7}
   aheadSpeed: 3
   followDamping: 0.5
+  zoomDamping: 0
 --- !u!114 &1495696126482489527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,28 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  maxSize: 7
-  minSize: 2.8
+  maxZoom: 0
   zoomSpeed: 1
-  zoomDamping: 2
---- !u!114 &2506056666102840757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495696126482489514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ccd1b8aa5a83f48b5fdb3390655e84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  cutoutRadius: 0
-  fallOffMargin: 0
 --- !u!81 &1495696126482489515
 AudioListener:
   m_ObjectHideFlags: 0

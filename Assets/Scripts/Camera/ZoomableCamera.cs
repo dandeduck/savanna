@@ -3,35 +3,40 @@ using UnityEngine;
 public class ZoomableCamera : MonoBehaviour
 {
     [SerializeField] private InputHandler input;
-    [SerializeField] private float maxSize;
-    [SerializeField] private float minSize;
+    [SerializeField] private float maxZoom;
     [SerializeField] private float zoomSpeed;
-    [SerializeField] private float zoomDamping;
 
-    private Camera objectCamera;
-    private float targetSize;
+    private FollowingCamera objectCamera;
+    private float zoom;
 
     private void Start()
     {
-        objectCamera = GetComponent<Camera>();
-        objectCamera.orthographicSize = maxSize;
-        targetSize = maxSize;
+        objectCamera = GetComponent<FollowingCamera>();
     }
 
     private void LateUpdate()
     {
-        SetZoom();
+        if (input.ZoomingIn())
+            ZoomIn();
+        else if (input.ZoomingOut())
+            ZoomOut();
     }
 
-    private void SetZoom()
+    private void ZoomIn()
     {
-        float zoom = objectCamera.orthographicSize;
+        if (zoom + zoomSpeed <= maxZoom)
+        {
+            objectCamera.ZoomIn(zoomSpeed);
+            zoom += zoomSpeed;
+        }
+    }
 
-        if (input.ZoomingIn())
-            targetSize = Mathf.Max(minSize, targetSize - zoomSpeed);
-        else if (input.ZoomingOut())
-            targetSize = Mathf.Min(maxSize, targetSize + zoomSpeed);
-            
-        objectCamera.orthographicSize = Mathf.Lerp(zoom, targetSize, zoomDamping * Time.deltaTime);
+    private void ZoomOut()
+    {
+        if (zoom - zoomSpeed >= 0)
+        {
+            objectCamera.ZoomOut(zoomSpeed);
+            zoom -= zoomSpeed;
+        }
     }
 }

@@ -1093,6 +1093,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1566917001}
+    - target: {fileID: 1495696126482489520, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: zoomDamping
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495696126482489524, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495696126482489524, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1141,10 +1153,22 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 1566917000}
+    - target: {fileID: 1495696126482489527, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: maxZoom
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495696126482489527, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: zoomSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2506056666102840757, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 699614455}
+    - target: {fileID: 2506056666102840757, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2506056666102840757, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: cutoutRadius
       value: 0.2
@@ -1165,7 +1189,8 @@ PrefabInstance:
       propertyPath: obstructionMaterials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fe3e3b8ebc1a32647b48b7ea88f534a8, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2506056666102840757, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
 --- !u!1001 &3777910452776057297
 PrefabInstance:
