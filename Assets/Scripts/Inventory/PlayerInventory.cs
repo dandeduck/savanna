@@ -9,18 +9,34 @@ public class PlayerInventory : MonoBehaviour
         return useBar.Pickup(item);
     }
 
-    public Item SelectedItem()
+    public void UseSelectedItem()
+    {
+        UseSelectedItem(UsePosition(), Quaternion.Euler(Vector3.zero));
+    }
+
+    public void UseSelectedItem(Quaternion rotation)
+    {
+        UseSelectedItem(UsePosition(), rotation);
+    }
+
+    public void UseSelectedItem(Vector3 position, Quaternion rotation)
+    {
+        Item selected = SelectedItem();
+
+        if (selected != null)
+        {
+            selected.Use(position, rotation);
+            useBar.RemoveSelfDroppedItem(selected.Type());
+        }
+    }
+    
+    private Item SelectedItem()
     {
         return useBar.SelectedItem();
     }
 
-    public Vector3 UsePosition()
+    private Vector3 UsePosition()
     {
         return useBar.transform.position;
-    }
-
-    public void RemoveUsedItem(Item item)
-    {
-        useBar.RemoveSelfDroppedItem(item.Type());
     }
 }

@@ -47,6 +47,11 @@ public abstract class Item : MonoBehaviour
         return item;
     }
 
+    public void AddAmount(int amount)
+    {
+        SetAmount(this.amount + amount);
+    }
+
     public void SetAmount(int amount)
     {
         this.amount = amount;

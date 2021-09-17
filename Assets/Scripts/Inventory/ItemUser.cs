@@ -15,17 +15,6 @@ public class ItemUser : MonoBehaviour
     private void Update()
     {
         if (input.UsingItem())
-            UseItem();
-    }
-
-    private void UseItem()
-    {
-        Item selected = inventory.SelectedItem();
-
-        if (selected != null)
-        {
-            selected.Use(inventory.UsePosition(), transform.rotation);
-            inventory.RemoveUsedItem(selected);
-        }
+            inventory.UseSelectedItem(transform.rotation);
     }
 }
