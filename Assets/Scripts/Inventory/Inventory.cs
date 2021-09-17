@@ -25,31 +25,45 @@ public class Inventory : MonoBehaviour
         return itemsArr;
     }
 
-    public bool Pickup(Item pickedUp)
+    public bool Pickup(Item item)
     {
         if (items.Count == size)
             return false;
 
-        string type = pickedUp.Type();
+        string type = item.Type();
 
         if (items.ContainsKey(type))
-            items[type].Merge(pickedUp);
+            items[type].Merge(item);
         else
-            items.Add(type, pickedUp.Pickup());
+            items.Add(type, item.Pickup());
 
         return true;
     }
 
-    public void Drop(string type, int amountDropped)
+    public Item Drop(Item item, int amountDropped)
+    {
+        return Drop(item.Type(), amountDropped);
+    }
+
+    public Item Drop(string type, int amountDropped)
     {
         if (items.ContainsKey(type))
         {
             Item item = items[type];
-            item.Drop(amountDropped, transform.position);
+            Item dropped = item.Drop(amountDropped, transform.position);
 
             if (item.Amount() == 0)
                 items.Remove(type);
+
+            return dropped;
         }
+
+        return null;
+    }
+
+    public bool Consume(Item item, int amount)
+    {
+        return Consume(item.Type(), amount);
     }
 
     public bool Consume(string type, int amount)
@@ -82,7 +96,12 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    public void RemoveSelfDroppedItem(string type)
+    public void ClearUsedItem(Item item)
+    {
+        ClearUsedItem(item.Type());
+    }
+
+    public void ClearUsedItem(string type)
     {
         if (items.ContainsKey(type))
             if (items[type].Amount() <= 0)

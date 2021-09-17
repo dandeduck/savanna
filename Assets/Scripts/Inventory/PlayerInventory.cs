@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
         if (selected != null)
         {
             selected.Use(position, rotation);
-            useBar.RemoveSelfDroppedItem(selected.Type());
+            useBar.ClearUsedItem(selected.Type());
         }
     }
     
