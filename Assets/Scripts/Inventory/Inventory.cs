@@ -47,18 +47,21 @@ public class Inventory : MonoBehaviour
 
     public Item Drop(string type, int amountDropped)
     {
-        if (items.ContainsKey(type))
-        {
-            Item item = items[type];
-            Item dropped = item.Drop(amountDropped, transform.position);
+        if (!items.ContainsKey(type))
+            return null;
 
-            if (item.Amount() == 0)
-                items.Remove(type);
+        Item item = items[type];
+        Item dropped = item.Drop(amountDropped, transform.position);
 
-            return dropped;
-        }
+        if (item.Amount() == 0)
+            items.Remove(type);
 
-        return null;
+        return dropped;
+    }
+
+    public bool Consume(Item item)
+    {
+        return Consume(item, item.Amount());
     }
 
     public bool Consume(Item item, int amount)
@@ -68,22 +71,20 @@ public class Inventory : MonoBehaviour
 
     public bool Consume(string type, int amount)
     {
-        if (items.ContainsKey(type))
-        {
-            Item item = items[type];
+        if (!items.ContainsKey(type))
+            return false;
 
-            if (amount > item.Amount())
-                return false;
+        Item item = items[type];
 
-            item.ReduceAmount(amount);
+        if (amount > item.Amount())
+            return false;
 
-            if (amount == item.Amount())
-                items.Remove(type);
-            
-            return true;
-        }
+        item.ReduceAmount(amount);
 
-        return false;
+        if (amount == item.Amount())
+            items.Remove(type);
+        
+        return true;
     }
 
     public Item SelectedItem()
@@ -94,6 +95,11 @@ public class Inventory : MonoBehaviour
             return arr[0];
         
         return null;
+    }
+
+    public bool ContainsExact(Item item)
+    {
+        return items.ContainsValue(item);
     }
 
     public void ClearUsedItem(Item item)

@@ -76,4 +76,27 @@ public abstract class Item : MonoBehaviour
     protected virtual void OnStart() {}
     protected abstract void OnPickup();
     protected abstract void OnDrop(Item droppedItem);
+
+    public override bool Equals(object obj)
+    {   
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        return Equals((Item) obj);
+    }
+
+    public bool Equals(Item item)
+    {
+        return type == item.type && amount == item.amount;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override string ToString()
+    {
+        return $"{amount} {type}(s)";
+    }
 }
