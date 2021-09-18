@@ -5,6 +5,7 @@ public class Recipe : MonoBehaviour
     [SerializeField] private Item[] ingredients;
     [SerializeField] private int[] ingredientAmounts;
     [SerializeField] private Item result;
+    [SerializeField] private bool isLocked;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class Recipe : MonoBehaviour
 
     public Item Craft(Inventory inventory)
     {
-        if (!CanCraft(inventory))
+        if (isLocked || !CanCraft(inventory))
             return null;
         
         foreach (Item ingredient in ingredients)
@@ -36,5 +37,15 @@ public class Recipe : MonoBehaviour
         }
 
         return Instantiate(result, inventory.transform.position, inventory.transform.rotation);
+    }
+
+    public void Unlock()
+    {
+        isLocked = false;
+    }
+
+    public bool IsLocked()
+    {
+        return isLocked;
     }
 }
