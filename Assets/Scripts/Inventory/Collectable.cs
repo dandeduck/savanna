@@ -5,7 +5,7 @@ public abstract class Collectable : Item
     private MeshRenderer meshRenderer;
     private Collider objectCollider;
 
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         objectCollider = GetComponent<Collider>();

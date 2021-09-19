@@ -7,11 +7,11 @@ public abstract class Item : MonoBehaviour
 
     private int amount;
     
-    private void Start()
+    private void Awake()
     {
         amount = initialAmount;
 
-        OnStart();
+        OnAwake();
     }
 
     public int Amount()
@@ -73,7 +73,7 @@ public abstract class Item : MonoBehaviour
     }
 
     public abstract void Use(Vector3 position, Quaternion rotation);
-    protected virtual void OnStart() {}
+    protected virtual void OnAwake() {}
     protected abstract void OnPickup();
     protected abstract void OnDrop(Item droppedItem);
 

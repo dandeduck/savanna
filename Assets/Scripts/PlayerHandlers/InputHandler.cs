@@ -113,4 +113,9 @@ public class InputHandler : MonoBehaviour
 
         return -1;
     }
+
+    public bool CraftTesting()
+    {
+        return Input.GetKeyDown(KeyCode.Tab);
+    }
 }

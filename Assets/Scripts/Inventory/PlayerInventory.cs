@@ -4,6 +4,8 @@ using System;
 public class PlayerInventory : Inventory
 {
     [SerializeField] private int lowerInventorySize;
+    
+    [SerializeField] private Recipe testRecipe;
 
     private InputHandler input;
     private int selectedIndex;
@@ -21,6 +23,9 @@ public class PlayerInventory : Inventory
 
         if (input.UsingItem())
             UseSelectedItem(Quaternion.LookRotation(input.AimDirection() - transform.position));
+
+        if (input.CraftTesting())
+            Craft(testRecipe, 1);
     }
 
     public Item[] LowerInventory()
