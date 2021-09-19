@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 3844843926694633403, guid: 9ebce80159986c64b9633d5034ec039f, type: 3}
   ingredientAmounts: 02000000
   result: {fileID: 4123619112459481831, guid: 529dc5352ebfe9d4e844bce34bfa9993, type: 3}
+  isLocked: 0
 --- !u!4 &342133967
 Transform:
   m_ObjectHideFlags: 0
@@ -1300,7 +1301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795008, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: halfCycleLengthMinutes
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3777910452090795009, guid: f2ee56b4109b4fd4bac1c16fcd4023b1, type: 3}
       propertyPath: m_RootOrder
@@ -1397,7 +1398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_Color.b
-      value: 0.47058824
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_Color.g
@@ -1405,7 +1406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.015686275
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080781, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: m_Shadows.m_Strength
@@ -1461,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6523270132609080783, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
       propertyPath: halfCycleLengthMinutes
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9350b582abf8ac54689b182e4c0fbf34, type: 3}
