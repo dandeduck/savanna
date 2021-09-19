@@ -1,42 +1,45 @@
 using UnityEngine;
+using System;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : Inventory
 {
-    [SerializeField] Inventory useBar;
+    [SerializeField] private int lowerInventorySize;
 
-    public bool Pickup(Item item)
+    private int selectedIndex;
+
+    public Item[] LowerInventory()
     {
-        return useBar.Pickup(item);
+        return new ArraySegment<Item>(Items(), Size()-lowerInventorySize, lowerInventorySize).Array;
     }
 
     public void UseSelectedItem()
     {
-        UseSelectedItem(UsePosition(), Quaternion.Euler(Vector3.zero));
+        UseSelectedItem(Quaternion.Euler(Vector3.zero));
     }
 
     public void UseSelectedItem(Quaternion rotation)
     {
-        UseSelectedItem(UsePosition(), rotation);
+        UseSelectedItem(transform.position, rotation);
     }
 
     public void UseSelectedItem(Vector3 position, Quaternion rotation)
     {
-        Item selected = SelectedItem();
+        Item selectedItem = Items()[selectedIndex];
 
-        if (selected != null)
-        {
-            selected.Use(position, rotation);
-            useBar.ClearUsedItem(selected.Type());
-        }
+        if (selectedItem == null)
+            return;
+
+        selectedItem.Use(position, rotation);
+    }
+
+    public void SelectItem(int index)
+    {
+        if (Size() >= index+1)
+            selectedIndex = index;
     }
     
-    private Item SelectedItem()
+    public Item SelectedItem()
     {
-        return useBar.SelectedItem();
-    }
-
-    private Vector3 UsePosition()
-    {
-        return useBar.transform.position;
+        return Items()[selectedIndex];
     }
 }

@@ -1,43 +1,67 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int size;
 
-    private Dictionary<string, Item> items;
+    private Item[] items;
     
-    private void Start()
+    private void Awake()
     {
-        items = new Dictionary<string, Item>();
+        items = new Item[size];
+
+        OnAwake();
     }
 
-    public Dictionary<string, Item> Items()
+    public int Size()
+    {
+        return size;
+    }
+
+    public Item[] Items()
     {
         return items;
     }
 
-    public Item[] ItemsArr()
+    public Item GetItem(string type)
     {
-        Item[] itemsArr = new Item[items.Count];
-        items.Values.CopyTo(itemsArr, 0);
+        int index = ItemIndex(type);
 
-        return itemsArr;
+        if (index != -1)
+            return items[index];
+        
+        return null;
     }
 
     public bool Pickup(Item item)
     {
-        if (items.Count == size)
-            return false;
+        int index = ItemIndex(item);
 
-        string type = item.Type();
+        if (index != -1)
+        {
+            items[index].Merge(item);
 
-        if (items.ContainsKey(type))
-            items[type].Merge(item);
+            return true;
+        }
+
         else
-            items.Add(type, item.Pickup());
+        {
+            index = FirstOpenIndex();
 
-        return true;
+            if (index != -1)
+            {
+                items[index] = item.Pickup();
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Item Drop(Item item)
+    {
+        return Drop(item, item.Amount());
     }
 
     public Item Drop(Item item, int amountDropped)
@@ -47,14 +71,13 @@ public class Inventory : MonoBehaviour
 
     public Item Drop(string type, int amountDropped)
     {
-        if (!items.ContainsKey(type))
+        int index = ItemIndex(type);
+
+        if (index == -1)
             return null;
 
-        Item item = items[type];
+        Item item = items[index];
         Item dropped = item.Drop(amountDropped, transform.position);
-
-        if (item.Amount() == 0)
-            items.Remove(type);
 
         return dropped;
     }
@@ -71,31 +94,31 @@ public class Inventory : MonoBehaviour
 
     public bool Consume(string type, int amount)
     {
-        if (!items.ContainsKey(type))
+        int index = ItemIndex(type);
+
+        if (index == -1)
             return false;
 
-        Item item = items[type];
+        Item item = items[index];
 
         if (amount > item.Amount())
             return false;
 
         item.ReduceAmount(amount);
-
-        if (amount == item.Amount())
-            items.Remove(type);
         
         return true;
     }
 
-    public Item SelectedItem()
+    public bool ContainsItem(Item item)
     {
-        Item[] arr = ItemsArr();
-
-        if (arr.Length > 0)
-            return arr[0];
-        
-        return null;
+        return ContainsItem(item.Type());
     }
+
+    public bool ContainsItem(string type)
+    {
+        return ItemIndex(type) != -1;
+    }
+
 
     public bool ContainsAtLeast(Item item)
     {
@@ -109,21 +132,58 @@ public class Inventory : MonoBehaviour
 
     public bool ContainsAtLeast(string type, int amount)
     {
-        if (!items.ContainsKey(type))
+        int index = ItemIndex(type);
+
+        if (index != -1)
+            return items[index].Amount() >= amount;
+
+        return false;
+    }
+
+    public bool Craft(Recipe recipe, int amount)
+    {
+        Item crafted = recipe.Craft(this, amount);
+
+        if (crafted == null)
             return false;
+
+        if (!Pickup(crafted))
+            Drop(crafted);
         
-        return items[type].Amount() >= amount;
+        return true;
     }
 
-    public void ClearUsedItem(Item item)
+    protected virtual void OnAwake()  {}
+
+    private int ItemIndex(Item item)
     {
-        ClearUsedItem(item.Type());
+        return ItemIndex(item.Type());
     }
 
-    public void ClearUsedItem(string type)
+    private int ItemIndex(string type)
     {
-        if (items.ContainsKey(type))
-            if (items[type].Amount() <= 0)
-                items.Remove(type);
+        for (int i = 0; i < items.Length; ++i)
+        {
+            if (items[i] != null && items[i].Type() == type)
+                return i;
+        }
+
+        return -1;
+    }
+
+    private bool IsFull()
+    {
+        return FirstOpenIndex() != -1;
+    }
+
+    private int FirstOpenIndex()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+                return i;
+        }
+
+        return -1;
     }
 }

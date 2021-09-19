@@ -62,7 +62,7 @@ public abstract class Item : MonoBehaviour
         this.amount -= amount;
 
         if (amount <= 0)
-            Destroy(this.gameObject, Time.deltaTime);
+            Destroy(this, Time.deltaTime);
     }
 
     public void Merge(Item item)
