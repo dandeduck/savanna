@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44080df3cf4524a4aa84551564e0e6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Ball
+  type: Big Ball
   initialAmount: 1

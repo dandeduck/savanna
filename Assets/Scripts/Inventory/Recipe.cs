@@ -17,18 +17,23 @@ public class Recipe : MonoBehaviour
 
     public bool CanCraft(Inventory inventory)
     {
+        return CanCraft(inventory, 1);
+    }
+
+    public bool CanCraft(Inventory inventory, int amount)
+    {
         foreach (Item ingredient in ingredients)
         {
-            if (!inventory.ContainsExact(ingredient))
+            if (!inventory.ContainsAtLeast(ingredient, ingredient.Amount() * amount))
                 return false;
         }
 
         return true;
     }
 
-    public Item Craft(Inventory inventory)
+    public Item Craft(Inventory inventory, int amount)
     {
-        if (isLocked || !CanCraft(inventory))
+        if (isLocked || !CanCraft(inventory, amount))
             return null;
         
         foreach (Item ingredient in ingredients)
@@ -36,7 +41,10 @@ public class Recipe : MonoBehaviour
             inventory.Consume(ingredient);
         }
 
-        return Instantiate(result, inventory.transform.position, inventory.transform.rotation);
+        Item output = Instantiate(result, inventory.transform.position, inventory.transform.rotation);
+        output.SetAmount(amount);
+
+        return output;
     }
 
     public void Unlock()

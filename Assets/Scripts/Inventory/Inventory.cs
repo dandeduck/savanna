@@ -97,9 +97,22 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    public bool ContainsExact(Item item)
+    public bool ContainsAtLeast(Item item)
     {
-        return items.ContainsValue(item);
+        return ContainsAtLeast(item, item.Amount());
+    }
+
+    public bool ContainsAtLeast(Item item, int amount)
+    {
+        return ContainsAtLeast(item.Type(), amount);
+    }
+
+    public bool ContainsAtLeast(string type, int amount)
+    {
+        if (!items.ContainsKey(type))
+            return false;
+        
+        return items[type].Amount() >= amount;
     }
 
     public void ClearUsedItem(Item item)
