@@ -18,8 +18,6 @@ public class ItemUser : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(inventory.SelectedItem());
-        Debug.Log(inventory.SelectedItem() == null);
         if (input.UsingItem())
             inventory.UseSelectedItem(transform.rotation);
     }
