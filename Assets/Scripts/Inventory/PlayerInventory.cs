@@ -1,26 +1,60 @@
 using UnityEngine;
+using System;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : Inventory
 {
-    [SerializeField] Inventory useBar;
+    [SerializeField] private int lowerInventorySize;
+    
+    [SerializeField] private Recipe testRecipe;
 
-    public bool Pickup(Item item)
+    private InputHandler input;
+    private int selectedIndex;
+
+    protected override void OnAwake()
     {
-        return useBar.Pickup(item);
+        input = GetComponent<InputHandler>();
+        selectedIndex = 0;
     }
 
+    protected override void OnUpdate()
+    {
+        if (input.ChangingSelectedItem())
+            selectedIndex = input.SelectedItem();
+
+        if (input.UsingItem())
+            UseSelectedItem(Quaternion.LookRotation(input.AimDirection() - transform.position));
+
+        if (input.CraftTesting())
+            Craft(testRecipe, 1);
+    }
+
+    public Item[] LowerInventory()
+    {
+        return new ArraySegment<Item>(Items(), Size()-lowerInventorySize, lowerInventorySize).Array;
+    }
+
+    private void UseSelectedItem()
+    {
+        UseSelectedItem(Quaternion.Euler(Vector3.zero));
+    }
+
+    private void UseSelectedItem(Quaternion rotation)
+    {
+        UseSelectedItem(transform.position, rotation);
+    }
+
+    private void UseSelectedItem(Vector3 position, Quaternion rotation)
+    {
+        Item selectedItem = Items()[selectedIndex];
+
+        if (selectedItem == null)
+            return;
+
+        selectedItem.Use(position, rotation);
+    }
+    
     public Item SelectedItem()
     {
-        return useBar.SelectedItem();
-    }
-
-    public Vector3 UsePosition()
-    {
-        return useBar.transform.position;
-    }
-
-    public void RemoveUsedItem(Item item)
-    {
-        useBar.RemoveSelfDroppedItem(item.Type());
+        return Items()[selectedIndex];
     }
 }

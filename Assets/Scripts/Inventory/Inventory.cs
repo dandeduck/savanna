@@ -1,91 +1,201 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int size;
 
-    private Dictionary<string, Item> items;
+    private Item[] items;
     
-    private void Start()
+    private void Awake()
     {
-        items = new Dictionary<string, Item>();
+        items = new Item[size];
+
+        OnAwake();
     }
 
-    public Dictionary<string, Item> Items()
+    private void Start()
+    {
+        OnStart();
+    }
+
+    private void Update()
+    {
+        OnUpdate();
+    }
+
+    public int Size()
+    {
+        return size;
+    }
+
+    public Item[] Items()
     {
         return items;
     }
 
-    public Item[] ItemsArr()
+    public Item GetItem(string type)
     {
-        Item[] itemsArr = new Item[items.Count];
-        items.Values.CopyTo(itemsArr, 0);
+        int index = ItemIndex(type);
 
-        return itemsArr;
+        if (index != -1)
+            return items[index];
+        
+        return null;
     }
 
-    public bool Pickup(Item pickedUp)
+    public bool Pickup(Item item)
     {
-        if (items.Count == size)
-            return false;
+        int index = ItemIndex(item);
 
-        string type = pickedUp.Type();
-
-        if (items.ContainsKey(type))
-            items[type].Merge(pickedUp);
-        else
-            items.Add(type, pickedUp.Pickup());
-
-        return true;
-    }
-
-    public void Drop(string type, int amountDropped)
-    {
-        if (items.ContainsKey(type))
+        if (index != -1)
         {
-            Item item = items[type];
-            item.Drop(amountDropped, transform.position);
+            items[index].Merge(item);
 
-            if (item.Amount() == 0)
-                items.Remove(type);
-        }
-    }
-
-    public bool Consume(string type, int amount)
-    {
-        if (items.ContainsKey(type))
-        {
-            Item item = items[type];
-
-            if (amount > item.Amount())
-                return false;
-
-            item.ReduceAmount(amount);
-
-            if (amount == item.Amount())
-                items.Remove(type);
-            
             return true;
+        }
+
+        else
+        {
+            index = FirstOpenIndex();
+
+            if (index != -1)
+            {
+                items[index] = item.Pickup();
+
+                return true;
+            }
         }
 
         return false;
     }
 
-    public Item SelectedItem()
+    public Item Drop(Item item)
     {
-        Item[] arr = ItemsArr();
-
-        if (arr.Length > 0)
-            return arr[0];
-        
-        return null;
+        return Drop(item, item.Amount());
     }
 
-    public void RemoveSelfDroppedItem(string type)
+    public Item Drop(Item item, int amountDropped)
     {
-        if (items.ContainsKey(type))
-            if (items[type].Amount() <= 0)
-                items.Remove(type);
+        return Drop(item.Type(), amountDropped);
+    }
+
+    public Item Drop(string type, int amountDropped)
+    {
+        int index = ItemIndex(type);
+
+        if (index == -1)
+            return null;
+
+        Item item = items[index];
+        Item dropped = item.Drop(amountDropped, transform.position);
+
+        return dropped;
+    }
+
+    public bool Consume(Item item)
+    {
+        return Consume(item, item.Amount());
+    }
+
+    public bool Consume(Item item, int amount)
+    {
+        return Consume(item.Type(), amount);
+    }
+
+    public bool Consume(string type, int amount)
+    {
+        int index = ItemIndex(type);
+
+        if (index == -1)
+            return false;
+
+        Item item = items[index];
+
+        if (amount > item.Amount())
+            return false;
+
+        item.ReduceAmount(amount);
+        
+        return true;
+    }
+
+    public bool ContainsItem(Item item)
+    {
+        return ContainsItem(item.Type());
+    }
+
+    public bool ContainsItem(string type)
+    {
+        return ItemIndex(type) != -1;
+    }
+
+
+    public bool ContainsAtLeast(Item item)
+    {
+        return ContainsAtLeast(item, item.Amount());
+    }
+
+    public bool ContainsAtLeast(Item item, int amount)
+    {
+        return ContainsAtLeast(item.Type(), amount);
+    }
+
+    public bool ContainsAtLeast(string type, int amount)
+    {
+        int index = ItemIndex(type);
+
+        if (index != -1)
+            return items[index].Amount() >= amount;
+
+        return false;
+    }
+
+    public bool Craft(Recipe recipe, int amount)
+    {
+        Item crafted = recipe.Craft(this, amount);
+
+        if (crafted == null)
+            return false;
+
+        if (!Pickup(crafted))
+            Drop(crafted);
+        
+        return true;
+    }
+
+    protected virtual void OnAwake()  {}
+    protected virtual void OnStart() {}
+    protected virtual void OnUpdate() {}
+
+    private int ItemIndex(Item item)
+    {
+        return ItemIndex(item.Type());
+    }
+
+    private int ItemIndex(string type)
+    {
+        for (int i = 0; i < items.Length; ++i)
+        {
+            if (items[i] != null && items[i].Type() == type)
+                return i;
+        }
+
+        return -1;
+    }
+
+    private bool IsFull()
+    {
+        return FirstOpenIndex() != -1;
+    }
+
+    private int FirstOpenIndex()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+                return i;
+        }
+
+        return -1;
     }
 }

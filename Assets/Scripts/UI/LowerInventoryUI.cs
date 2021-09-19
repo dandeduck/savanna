@@ -17,8 +17,8 @@ public class LowerInventoryUI : MonoBehaviour
     {
         int amountOfBalls = 0;
 
-        if (inventory.Items().ContainsKey("Ball"))
-            amountOfBalls = inventory.Items()["Ball"].Amount();
+        if (inventory.ContainsItem("Ball"))
+            amountOfBalls = inventory.GetItem("Ball").Amount();
         
         text.text = $"{amountOfBalls} Balls";
 

@@ -85,4 +85,37 @@ public class InputHandler : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.E);
     }
+
+    public bool ChangingSelectedItem()
+    {
+        return SelectedItem() != -1;
+    }
+
+    public int SelectedItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            return 0;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            return 1;
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            return 2;
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            return 3;
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            return 4;
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            return 5;
+
+        return -1;
+    }
+
+    public bool CraftTesting()
+    {
+        return Input.GetKeyDown(KeyCode.Tab);
+    }
 }

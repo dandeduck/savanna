@@ -7,11 +7,11 @@ public abstract class Item : MonoBehaviour
 
     private int amount;
     
-    private void Start()
+    private void Awake()
     {
         amount = initialAmount;
 
-        OnStart();
+        OnAwake();
     }
 
     public int Amount()
@@ -42,9 +42,14 @@ public abstract class Item : MonoBehaviour
         OnDrop(item);
 
         if (amount <= 0)
-            Destroy(this.gameObject, Time.deltaTime);
+            Destroy(gameObject, Time.deltaTime);
 
         return item;
+    }
+
+    public void AddAmount(int amount)
+    {
+        SetAmount(this.amount + amount);
     }
 
     public void SetAmount(int amount)
@@ -56,8 +61,8 @@ public abstract class Item : MonoBehaviour
     {
         this.amount -= amount;
 
-        if (amount <= 0)
-            Destroy(this.gameObject, Time.deltaTime);
+        if (this.amount <= 0)
+            Destroy(gameObject, Time.deltaTime);
     }
 
     public void Merge(Item item)
@@ -68,7 +73,30 @@ public abstract class Item : MonoBehaviour
     }
 
     public abstract void Use(Vector3 position, Quaternion rotation);
-    protected virtual void OnStart() {}
+    protected virtual void OnAwake() {}
     protected abstract void OnPickup();
     protected abstract void OnDrop(Item droppedItem);
+
+    public override bool Equals(object obj)
+    {   
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        return Equals((Item) obj);
+    }
+
+    public bool Equals(Item item)
+    {
+        return type == item.type && amount == item.amount;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override string ToString()
+    {
+        return $"{amount} {type}(s)";
+    }
 }
