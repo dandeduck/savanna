@@ -5,7 +5,23 @@ public class PlayerInventory : Inventory
 {
     [SerializeField] private int lowerInventorySize;
 
+    private InputHandler input;
     private int selectedIndex;
+
+    protected override void OnAwake()
+    {
+        input = GetComponent<InputHandler>();
+        selectedIndex = 0;
+    }
+
+    protected override void OnUpdate()
+    {
+        if (input.ChangingSelectedItem())
+            selectedIndex = input.SelectedItem();
+
+        if (input.UsingItem())
+            UseSelectedItem(transform.rotation);
+    }
 
     public Item[] LowerInventory()
     {
@@ -30,12 +46,6 @@ public class PlayerInventory : Inventory
             return;
 
         selectedItem.Use(position, rotation);
-    }
-
-    public void SelectItem(int index)
-    {
-        if (Size() >= index+1)
-            selectedIndex = index;
     }
     
     public Item SelectedItem()

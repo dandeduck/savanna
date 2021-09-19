@@ -13,6 +13,16 @@ public class Inventory : MonoBehaviour
         OnAwake();
     }
 
+    private void Start()
+    {
+        OnStart();
+    }
+
+    private void Update()
+    {
+        OnUpdate();
+    }
+
     public int Size()
     {
         return size;
@@ -154,6 +164,8 @@ public class Inventory : MonoBehaviour
     }
 
     protected virtual void OnAwake()  {}
+    protected virtual void OnStart() {}
+    protected virtual void OnUpdate() {}
 
     private int ItemIndex(Item item)
     {
