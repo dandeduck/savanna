@@ -20,7 +20,7 @@ public class PlayerInventory : Inventory
             selectedIndex = input.SelectedItem();
 
         if (input.UsingItem())
-            UseSelectedItem(transform.rotation);
+            UseSelectedItem(Quaternion.LookRotation(input.AimDirection() - transform.position));
     }
 
     public Item[] LowerInventory()
@@ -28,17 +28,17 @@ public class PlayerInventory : Inventory
         return new ArraySegment<Item>(Items(), Size()-lowerInventorySize, lowerInventorySize).Array;
     }
 
-    public void UseSelectedItem()
+    private void UseSelectedItem()
     {
         UseSelectedItem(Quaternion.Euler(Vector3.zero));
     }
 
-    public void UseSelectedItem(Quaternion rotation)
+    private void UseSelectedItem(Quaternion rotation)
     {
         UseSelectedItem(transform.position, rotation);
     }
 
-    public void UseSelectedItem(Vector3 position, Quaternion rotation)
+    private void UseSelectedItem(Vector3 position, Quaternion rotation)
     {
         Item selectedItem = Items()[selectedIndex];
 
