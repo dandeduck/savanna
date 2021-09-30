@@ -3,6 +3,11 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     
     public float Horizontal()
     {
