@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -366,7 +366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367897222}
-  m_LocalRotation: {x: 0.38745475, y: 0.00000001586237, z: -0.000000006666695, w: 0.9218887}
+  m_LocalRotation: {x: 0.38745475, y: -0.00000001586237, z: 0.000000006666695, w: 0.9218887}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -470,6 +470,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.865
       objectReference: {fileID: 0}
+    - target: {fileID: 5877653098079884584, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
+      propertyPath: thirdPersonCamera
+      value: 
+      objectReference: {fileID: 1495696125873974090}
     - target: {fileID: 5877653098079884585, guid: 5cdcb3735fe159e4aa65f3f6a71533d9, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -535,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 648087201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 649162836}
   - component: {fileID: 649162835}
+  - component: {fileID: 649162837}
   m_Layer: 0
   m_Name: ThridPersonCam
   m_TagString: Untagged
@@ -601,7 +606,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -698,6 +703,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &649162837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649162834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 128
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 0
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 1
+  m_OptimalTargetDistance: 0
 --- !u!1001 &668603886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1192,7 +1227,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -1269,7 +1304,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -1291,7 +1326,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398486409}
-  m_LocalRotation: {x: 0.40415934, y: 0.00000001573848, z: -0.00000000695412, w: 0.9146886}
+  m_LocalRotation: {x: 0.40415934, y: -0.00000001573848, z: 0.00000000695412, w: 0.9146886}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1487,7 +1522,7 @@ GameObject:
   - component: {fileID: 1917817052}
   - component: {fileID: 1917817051}
   - component: {fileID: 1917817053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: default(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1946,7 +1981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489524, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: near clip plane
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489524, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: orthographic size
@@ -1978,11 +2013,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015867112
+      value: -0.000000015867112
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000006664016
+      value: 0.000000006664016
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2089,6 +2124,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1495696125873974090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
+  m_PrefabInstance: {fileID: 1495696125873974084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3777910452776057297
 PrefabInstance:
   m_ObjectHideFlags: 0
