@@ -8,7 +8,6 @@ public class PlayerPickupper : MonoBehaviour
     Navigator navigator;
 
     private List<Item> items;
-    private Item selected;
 
     private void Start()
     {
@@ -22,10 +21,7 @@ public class PlayerPickupper : MonoBehaviour
     private void Update()
     {
         if (input.PickingUp()) 
-            selected = GetSelected();
-
-        if (selected != null)
-            Pickup();
+            Pickup(GetSelected());
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -46,43 +42,26 @@ public class PlayerPickupper : MonoBehaviour
 
     private Item GetSelected()
     {
-        if (input.HasAim())
-        {
-            Item aimSelected =  GetAimSelected();
-
-            if (aimSelected != null)
-                navigator.Navigate(aimSelected.transform);
-
-            return aimSelected;
-        }
-
-        else
+        if (items.Count > 0)
             return items[0];
-    }
-
-    private Item GetAimSelected()
-    {
-        RaycastHit[] hits = input.AimRaycastAll();
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Item item = hits[i].transform.GetComponent<Item>();
-
-            if (item != null)
-                return item;
-        }
-
+        
         return null;
     }
 
-    private void Pickup()
+    private void Pickup(Item selected)
     {
-        if (items.Contains(selected))
-        {
-            inventory.Pickup(selected);
-            items.Remove(selected);
+        if (CanPickup(selected))
+            HandlePickup(selected);
+    }
 
-            selected = null;
-        }
+    private bool CanPickup(Item item)
+    {
+        return item != null && items.Contains(item);
+    }
+
+    private void HandlePickup(Item selected)
+    {
+        inventory.Pickup(selected);
+        items.Remove(selected);
     }
 }

@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.5, z: -6.83}
+  m_FollowOffset: {x: 0, y: 6.46, z: -6.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -366,7 +366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367897222}
-  m_LocalRotation: {x: 0.38745475, y: -0.00000001586237, z: 0.000000006666695, w: 0.9218887}
+  m_LocalRotation: {x: 0.35282817, y: 0.000000022768564, z: -0.000000008585543, w: 0.93568814}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -675,12 +675,12 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 10.59
-    m_Radius: 8.85
-  - m_Height: 7.5
+  - m_Height: 8.82
+    m_Radius: 7.9
+  - m_Height: 6.46
     m_Radius: 6.83
-  - m_Height: -1.51
-    m_Radius: 4.42
+  - m_Height: -0.61
+    m_Radius: 3.4
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 1398486410}
@@ -694,7 +694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649162834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.36, z: -6.81411}
+  m_LocalPosition: {x: 0, y: 7.32, z: -6.81411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1398486411}
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.5, z: -6.83}
+  m_FollowOffset: {x: 0, y: 6.46, z: -6.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1249,7 +1249,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357668760}
-  m_LocalRotation: {x: 0.3706666, y: 2.0294308e-15, z: -2.2358413e-15, w: 0.928766}
+  m_LocalRotation: {x: 0.3357954, y: -0.000000016207293, z: 0.000000005777824, w: 0.941935}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1326,7 +1326,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398486409}
-  m_LocalRotation: {x: 0.40415934, y: -0.00000001573848, z: 0.00000000695412, w: 0.9146886}
+  m_LocalRotation: {x: 0.36978948, y: -0.000000015986716, z: 0.000000006362739, w: 0.9291156}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.5, z: -6.83}
+  m_FollowOffset: {x: 0, y: 6.46, z: -6.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1997,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.36
+      value: 7.32
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2005,19 +2005,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9218887
+      value: 0.93568814
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.38745475
+      value: 0.35282817
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015867112
+      value: 0.000000022768095
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000006664016
+      value: -0.000000008584295
       objectReference: {fileID: 0}
     - target: {fileID: 1495696126482489525, guid: 06a45a68c835e1042a08f0158f20c133, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

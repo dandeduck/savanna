@@ -58,7 +58,7 @@ public class InputHandler : MonoBehaviour
 
     public bool PickingUp()
     {
-        return Input.GetMouseButtonDown(1);
+        return Input.GetKeyDown(KeyCode.F);
     }
 
     public bool Dropping()
