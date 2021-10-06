@@ -2,58 +2,31 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+    [SerializeField] private Transform mainCamera;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     
-    public float Horizontal()
+    public float HorizontalMovement()
     {
         return Input.GetAxisRaw("Horizontal");
     }
 
-    public float Vertical()
+    public float VerticalMovement()
     {
         return Input.GetAxisRaw("Vertical");
     }
 
-    public bool HasAim()
+    public Quaternion AimDirection()
     {
-        return true;
-    }
-
-    public Vector3 AimDirection()
-    {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        float rayLength;
-
-        if (groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            return new Vector3(pointToLook.x, 0, pointToLook.z);
-        }
-
-        return Vector3.zero;
-    }
-
-    public RaycastHit AimRaycast()
-    {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit = new RaycastHit();
-        
-        Physics.Raycast(cameraRay, out hit);
-
-        return hit;
-    }
-
-    public RaycastHit[] AimRaycastAll()
-    {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        return Physics.RaycastAll(cameraRay);
+        return mainCamera.rotation;
     }
 
     public bool PickingUp()
     {
-        return Input.GetMouseButtonDown(1);
+        return Input.GetKeyDown(KeyCode.F);
     }
 
     public bool Dropping()

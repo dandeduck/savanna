@@ -22,7 +22,7 @@ public class PlayerInventory : Inventory
             selectedIndex = input.SelectedItem();
 
         if (input.UsingItem())
-            UseSelectedItem(Quaternion.LookRotation(input.AimDirection() - transform.position));
+            UseSelectedItem(input.AimDirection());
 
         if (input.CraftTesting())
             Craft(testRecipe, 1);

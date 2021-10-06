@@ -5,6 +5,8 @@ public class PlayerMovement : Navigator
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float crouchSpeed;
+
+    [SerializeField] private Transform thirdPersonCamera;
     
     private InputHandler input;
 
@@ -28,6 +30,9 @@ public class PlayerMovement : Navigator
 
     public override Vector3 Direction()
     {
-        return new Vector3(input.Horizontal(), 0f, input.Vertical()).normalized;
+        Vector3 inputDirection = new Vector3(input.HorizontalMovement(), 0f, input.VerticalMovement());
+        Vector3 cameraRelativeDirection = thirdPersonCamera.rotation * inputDirection;
+
+        return cameraRelativeDirection.normalized;
     }
 }
