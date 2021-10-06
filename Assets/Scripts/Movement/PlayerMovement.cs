@@ -30,7 +30,7 @@ public class PlayerMovement : Navigator
 
     public override Vector3 Direction()
     {
-        Vector3 inputDirection = new Vector3(input.Horizontal(), 0f, input.Vertical());
+        Vector3 inputDirection = new Vector3(input.HorizontalMovement(), 0f, input.VerticalMovement());
         Vector3 cameraRelativeDirection = thirdPersonCamera.rotation * inputDirection;
 
         return cameraRelativeDirection.normalized;
